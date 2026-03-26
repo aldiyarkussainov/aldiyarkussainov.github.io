@@ -4,20 +4,24 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>EMDEU — Case Study by Aldiyar Kussainov</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
 <style>
   :root {
     --bg: #f5f3ee;
-    --dark: #0f1117;
+    --dark: #0d1120;
+    --navy: #111827;
     --blue: #1a56e8;
     --blue-light: #e8effe;
     --teal: #0ea5a0;
     --text: #2c2c2c;
     --muted: #7a7a7a;
     --border: #e0ddd6;
+    --white: #ffffff;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
 
   body {
     font-family: 'DM Sans', sans-serif;
@@ -26,31 +30,83 @@
     line-height: 1.7;
   }
 
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(13,17,32,0.92);
+    backdrop-filter: blur(12px);
+    padding: 16px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    color: white;
+    font-size: 18px;
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: rgba(255,255,255,0.55);
+    text-decoration: none;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: white; }
+
   /* HERO */
   .hero {
     background: var(--dark);
     color: white;
-    padding: 120px 60px 100px;
+    padding: 160px 60px 100px;
     position: relative;
     overflow: hidden;
+    min-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
   }
 
-  .hero::before {
-    content: '';
+  .hero-bg {
     position: absolute;
-    top: -100px; right: -100px;
-    width: 500px; height: 500px;
-    background: radial-gradient(circle, rgba(26,86,232,0.3) 0%, transparent 70%);
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 80% 20%, rgba(26,86,232,0.25) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 40% at 20% 80%, rgba(14,165,160,0.15) 0%, transparent 60%);
     pointer-events: none;
   }
 
-  .hero::after {
-    content: '';
+  .hero-grid {
     position: absolute;
-    bottom: -80px; left: 200px;
-    width: 300px; height: 300px;
-    background: radial-gradient(circle, rgba(14,165,160,0.2) 0%, transparent 70%);
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
     pointer-events: none;
+  }
+
+  .hero-content { position: relative; z-index: 2; max-width: 1100px; }
+
+  .hero-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 40px;
   }
 
   .hero-tag {
@@ -58,219 +114,378 @@
     background: rgba(26,86,232,0.2);
     border: 1px solid rgba(26,86,232,0.4);
     color: #7ca5ff;
-    font-size: 12px;
+    font-size: 11px;
     letter-spacing: 2px;
     text-transform: uppercase;
-    padding: 6px 14px;
+    padding: 5px 14px;
     border-radius: 20px;
-    margin-bottom: 32px;
+  }
+
+  .hero-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: #7ca5ff;
+    opacity: 0.5;
   }
 
   .hero h1 {
     font-family: 'Playfair Display', serif;
-    font-size: clamp(48px, 7vw, 96px);
+    font-size: clamp(52px, 8vw, 108px);
     font-weight: 700;
-    line-height: 1.05;
-    margin-bottom: 24px;
-    max-width: 800px;
+    line-height: 0.95;
+    margin-bottom: 36px;
+    letter-spacing: -2px;
   }
 
-  .hero h1 span {
+  .hero h1 em {
+    font-style: italic;
     color: #7ca5ff;
   }
 
+  .hero-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 40px;
+    flex-wrap: wrap;
+  }
+
   .hero-desc {
-    font-size: 18px;
-    color: rgba(255,255,255,0.65);
-    max-width: 560px;
-    margin-bottom: 60px;
+    font-size: 17px;
+    color: rgba(255,255,255,0.55);
+    max-width: 480px;
     font-weight: 300;
+    line-height: 1.6;
   }
 
   .hero-meta {
     display: flex;
-    gap: 48px;
+    gap: 40px;
     flex-wrap: wrap;
   }
 
   .hero-meta-item label {
-    font-size: 11px;
+    font-size: 10px;
     letter-spacing: 2px;
     text-transform: uppercase;
-    color: rgba(255,255,255,0.4);
+    color: rgba(255,255,255,0.3);
     display: block;
-    margin-bottom: 6px;
+    margin-bottom: 4px;
   }
 
   .hero-meta-item span {
-    font-size: 15px;
-    color: rgba(255,255,255,0.9);
+    font-size: 14px;
+    color: rgba(255,255,255,0.85);
     font-weight: 500;
   }
 
-  /* CONTENT */
+  /* SECTIONS */
   .container {
-    max-width: 860px;
+    max-width: 1000px;
     margin: 0 auto;
-    padding: 0 40px;
+    padding: 0 48px;
   }
 
-  section {
-    padding: 80px 0;
-    border-bottom: 1px solid var(--border);
-  }
+  section { padding: 100px 0; }
 
-  section:last-child { border-bottom: none; }
+  .section-divider {
+    height: 1px;
+    background: var(--border);
+    max-width: 1000px;
+    margin: 0 auto;
+  }
 
   .section-label {
-    font-size: 11px;
+    font-size: 10px;
     letter-spacing: 3px;
     text-transform: uppercase;
     color: var(--blue);
-    font-weight: 500;
-    margin-bottom: 16px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    max-width: 40px;
+    height: 1px;
+    background: var(--blue);
+    opacity: 0.4;
   }
 
   h2 {
     font-family: 'Playfair Display', serif;
-    font-size: clamp(28px, 4vw, 42px);
+    font-size: clamp(30px, 4vw, 48px);
     font-weight: 700;
-    line-height: 1.2;
-    margin-bottom: 24px;
+    line-height: 1.15;
+    margin-bottom: 28px;
     color: var(--dark);
+    letter-spacing: -0.5px;
   }
 
   p {
-    font-size: 17px;
-    color: var(--text);
+    font-size: 16px;
+    color: #4a4a4a;
     margin-bottom: 20px;
     font-weight: 300;
+    line-height: 1.75;
   }
 
-  /* STATS ROW */
+  p:last-child { margin-bottom: 0; }
+
+  /* STATS */
   .stats {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 2px;
-    margin: 48px 0;
+    gap: 3px;
+    margin: 56px 0;
     background: var(--border);
-    border-radius: 16px;
+    border-radius: 20px;
     overflow: hidden;
   }
 
   .stat {
     background: white;
-    padding: 32px 28px;
+    padding: 36px 32px;
     text-align: center;
   }
 
   .stat-num {
     font-family: 'Playfair Display', serif;
-    font-size: 42px;
+    font-size: 52px;
     color: var(--blue);
     font-weight: 700;
     display: block;
     line-height: 1;
-    margin-bottom: 8px;
+    margin-bottom: 10px;
   }
 
   .stat-label {
     font-size: 13px;
     color: var(--muted);
-    font-weight: 400;
   }
 
-  /* PROBLEM CARDS */
+  /* PRODUCTS */
+  .product-tabs {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin: 48px 0;
+  }
+
+  .product-tab {
+    background: white;
+    border-radius: 20px;
+    padding: 32px 28px;
+    border-top: 4px solid transparent;
+    transition: all 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .product-tab::before {
+    content: '';
+    position: absolute;
+    bottom: 0; right: 0;
+    width: 80px; height: 80px;
+    background: radial-gradient(circle, rgba(26,86,232,0.06) 0%, transparent 70%);
+  }
+
+  .product-tab:nth-child(1) { border-top-color: var(--blue); }
+  .product-tab:nth-child(2) { border-top-color: var(--teal); }
+  .product-tab:nth-child(3) { border-top-color: #8b5cf6; }
+
+  .product-icon {
+    font-size: 36px;
+    margin-bottom: 16px;
+    display: block;
+  }
+
+  .product-tab h4 {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--dark);
+    margin-bottom: 10px;
+  }
+
+  .product-tab p {
+    font-size: 14px;
+    color: var(--muted);
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  /* PROBLEM */
   .problem-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 20px;
-    margin: 40px 0;
+    gap: 16px;
+    margin: 48px 0;
   }
 
   .problem-card {
     background: white;
-    border-radius: 16px;
-    padding: 28px;
-    border-left: 4px solid var(--blue);
+    border-radius: 20px;
+    padding: 32px;
+    position: relative;
+    overflow: hidden;
   }
 
   .problem-card.full { grid-column: 1 / -1; }
 
+  .problem-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 80px;
+    font-weight: 700;
+    color: var(--blue);
+    opacity: 0.06;
+    position: absolute;
+    top: -10px; right: 20px;
+    line-height: 1;
+  }
+
   .problem-card h4 {
-    font-size: 14px;
+    font-size: 11px;
     font-weight: 600;
-    color: var(--dark);
-    margin-bottom: 10px;
+    color: var(--blue);
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 2px;
+    margin-bottom: 14px;
   }
 
   .problem-card p {
     font-size: 15px;
+    color: var(--text);
     margin: 0;
-    color: var(--muted);
+    position: relative;
+    z-index: 1;
   }
 
   /* SCREENS */
-  .screens-grid {
+  .screens-section { background: var(--dark); padding: 100px 0; }
+
+  .screens-section .section-label { color: #7ca5ff; }
+  .screens-section h2 { color: white; }
+  .screens-section p { color: rgba(255,255,255,0.55); }
+
+  .screens-label {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.3);
+    margin: 56px 0 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .screens-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: rgba(255,255,255,0.08);
+  }
+
+  /* Mobile screens */
+  .mobile-screens {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(5, 1fr);
     gap: 16px;
-    margin: 40px 0;
+    margin-bottom: 16px;
   }
 
-  .screen-item {
-    background: white;
-    border-radius: 16px;
+  .mobile-screen {
+    background: #1a1f2e;
+    border-radius: 20px;
     overflow: hidden;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    border: 1px solid rgba(255,255,255,0.06);
+    transition: transform 0.2s;
   }
 
-  .screen-item img {
+  .mobile-screen:hover { transform: translateY(-4px); }
+
+  .mobile-screen img {
     width: 100%;
     display: block;
   }
 
   .screen-caption {
-    padding: 14px 16px;
-    font-size: 12px;
-    color: var(--muted);
-    font-weight: 500;
+    padding: 12px 14px;
+    font-size: 11px;
+    color: rgba(255,255,255,0.4);
     letter-spacing: 0.5px;
+    font-weight: 500;
+  }
+
+  /* Desktop screens */
+  .desktop-screen {
+    background: #1a1f2e;
+    border-radius: 20px;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.06);
+    margin-bottom: 16px;
+    transition: transform 0.2s;
+  }
+
+  .desktop-screen:hover { transform: translateY(-2px); }
+
+  .desktop-screen img {
+    width: 100%;
+    display: block;
+  }
+
+  .desktop-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  /* Uni screens */
+  .uni-screens {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
   }
 
   /* DECISIONS */
+  .decisions { background: white; }
+
   .decision-list {
     list-style: none;
-    margin: 32px 0;
+    margin: 48px 0 0;
   }
 
   .decision-list li {
-    display: flex;
-    gap: 20px;
-    padding: 24px 0;
+    display: grid;
+    grid-template-columns: 64px 1fr;
+    gap: 28px;
+    padding: 36px 0;
     border-bottom: 1px solid var(--border);
-    align-items: flex-start;
+    align-items: start;
   }
 
   .decision-list li:last-child { border-bottom: none; }
 
   .decision-num {
     font-family: 'Playfair Display', serif;
-    font-size: 32px;
+    font-size: 48px;
     color: var(--blue);
     font-weight: 700;
     line-height: 1;
-    min-width: 40px;
-    opacity: 0.4;
+    opacity: 0.2;
+    text-align: right;
+    padding-top: 4px;
   }
 
   .decision-content h4 {
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 600;
     color: var(--dark);
-    margin-bottom: 6px;
+    margin-bottom: 10px;
+    line-height: 1.3;
   }
 
   .decision-content p {
@@ -279,62 +494,13 @@
     margin: 0;
   }
 
-  /* RESULT */
-  .result-section {
-    background: var(--dark);
-    color: white;
-    padding: 80px 60px;
-    margin-top: 0;
-  }
-
-  .result-section .section-label { color: #7ca5ff; }
-  .result-section h2 { color: white; }
-  .result-section p { color: rgba(255,255,255,0.65); }
-
-  .result-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-    margin-top: 32px;
-  }
-
-  .result-tag {
-    background: rgba(26,86,232,0.2);
-    border: 1px solid rgba(26,86,232,0.3);
-    color: #7ca5ff;
-    padding: 8px 18px;
-    border-radius: 30px;
-    font-size: 14px;
-    font-weight: 500;
-  }
-
-  /* FOOTER */
-  .case-footer {
-    background: var(--bg);
-    padding: 60px;
-    text-align: center;
-    border-top: 1px solid var(--border);
-  }
-
-  .case-footer p {
-    color: var(--muted);
-    font-size: 14px;
-    margin: 0;
-  }
-
-  .case-footer a {
-    color: var(--blue);
-    text-decoration: none;
-    font-weight: 500;
-  }
-
-  /* HIGHLIGHT BOX */
+  /* HIGHLIGHT */
   .highlight {
     background: var(--blue-light);
     border-radius: 16px;
     padding: 28px 32px;
     margin: 32px 0;
-    border-left: 4px solid var(--blue);
+    border-left: 3px solid var(--blue);
   }
 
   .highlight p {
@@ -345,220 +511,364 @@
 
   .highlight strong { color: var(--blue); }
 
-  /* PRODUCTS */
-  .product-tabs {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
-    margin: 40px 0;
+  /* RESULT */
+  .result-section {
+    background: var(--dark);
+    padding: 100px 0;
+    position: relative;
+    overflow: hidden;
   }
 
-  .product-tab {
-    background: white;
-    border-radius: 16px;
-    padding: 28px 24px;
-    text-align: center;
-    border-top: 4px solid var(--border);
-    transition: border-color 0.2s;
+  .result-section::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background:
+      radial-gradient(ellipse 50% 60% at 90% 50%, rgba(26,86,232,0.2) 0%, transparent 60%),
+      radial-gradient(ellipse 30% 40% at 10% 50%, rgba(14,165,160,0.1) 0%, transparent 60%);
+    pointer-events: none;
   }
 
-  .product-tab.active { border-top-color: var(--blue); }
+  .result-section .container { position: relative; z-index: 2; }
+  .result-section .section-label { color: #7ca5ff; }
+  .result-section h2 { color: white; }
+  .result-section p { color: rgba(255,255,255,0.6); }
 
-  .product-icon {
-    font-size: 32px;
-    margin-bottom: 12px;
-    display: block;
+  .result-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 40px;
   }
 
-  .product-tab h4 {
-    font-size: 15px;
-    font-weight: 600;
-    color: var(--dark);
-    margin-bottom: 8px;
-  }
-
-  .product-tab p {
+  .result-tag {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.12);
+    color: rgba(255,255,255,0.7);
+    padding: 8px 18px;
+    border-radius: 30px;
     font-size: 13px;
-    color: var(--muted);
-    margin: 0;
+    font-weight: 500;
+    transition: all 0.2s;
   }
 
-  @media (max-width: 640px) {
-    .hero { padding: 80px 28px 60px; }
+  .result-tag:hover {
+    background: rgba(26,86,232,0.2);
+    border-color: rgba(26,86,232,0.4);
+    color: #7ca5ff;
+  }
+
+  /* FOOTER */
+  .case-footer {
+    background: #080b14;
+    padding: 48px 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .case-footer p { color: rgba(255,255,255,0.3); font-size: 13px; margin: 0; }
+  .case-footer a { color: rgba(255,255,255,0.6); text-decoration: none; transition: color 0.2s; }
+  .case-footer a:hover { color: #7ca5ff; }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    nav { padding: 14px 24px; }
+    .nav-links { display: none; }
+    .hero { padding: 120px 28px 60px; }
     .container { padding: 0 24px; }
+    section { padding: 72px 0; }
     .stats { grid-template-columns: 1fr; }
     .problem-grid { grid-template-columns: 1fr; }
-    .screens-grid { grid-template-columns: repeat(2, 1fr); }
+    .problem-card.full { grid-column: 1; }
     .product-tabs { grid-template-columns: 1fr; }
-    .result-section { padding: 60px 28px; }
-    .case-footer { padding: 40px 28px; }
-    .hero-meta { gap: 28px; }
+    .mobile-screens { grid-template-columns: repeat(2, 1fr); }
+    .desktop-grid { grid-template-columns: 1fr; }
+    .uni-screens { grid-template-columns: 1fr; }
+    .decision-list li { grid-template-columns: 1fr; gap: 8px; }
+    .decision-num { font-size: 32px; text-align: left; }
+    .case-footer { padding: 36px 24px; flex-direction: column; align-items: flex-start; }
   }
 </style>
 </head>
 <body>
 
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">AK</a>
+  <ul class="nav-links">
+    <li><a href="#overview">Overview</a></li>
+    <li><a href="#problem">Problem</a></li>
+    <li><a href="#screens">Screens</a></li>
+    <li><a href="#decisions">Decisions</a></li>
+    <li><a href="#result">Result</a></li>
+  </ul>
+</nav>
+
 <!-- HERO -->
 <div class="hero">
-  <div class="hero-tag">Case Study · 2024–2025</div>
-  <h1>EMDEU<br><span>Telehealth</span><br>Platform</h1>
-  <p class="hero-desc">Redesigning a digital healthcare ecosystem for patients, doctors, and universities across CIS markets.</p>
-  <div class="hero-meta">
-    <div class="hero-meta-item">
-      <label>Role</label>
-      <span>UI/UX Designer</span>
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">
+      <span class="hero-tag">Case Study · 2024–2025</span>
+      <span class="hero-dot"></span>
+      <span class="hero-tag" style="background:rgba(14,165,160,0.15);border-color:rgba(14,165,160,0.3);color:#5eead4;">Healthcare · CIS</span>
     </div>
-    <div class="hero-meta-item">
-      <label>Platform</label>
-      <span>iOS · Web · Admin</span>
-    </div>
-    <div class="hero-meta-item">
-      <label>Timeline</label>
-      <span>2024–2025</span>
-    </div>
-    <div class="hero-meta-item">
-      <label>Status</label>
-      <span>Launching</span>
+    <h1>EMDEU<br><em>Telehealth</em><br>Platform</h1>
+    <div class="hero-bottom">
+      <p class="hero-desc">Redesigning a digital healthcare ecosystem for patients, doctors, and universities across CIS markets — three products, one designer.</p>
+      <div class="hero-meta">
+        <div class="hero-meta-item">
+          <label>Role</label>
+          <span>UI/UX Designer</span>
+        </div>
+        <div class="hero-meta-item">
+          <label>Platform</label>
+          <span>iOS · Web Admin</span>
+        </div>
+        <div class="hero-meta-item">
+          <label>Timeline</label>
+          <span>2024–2025</span>
+        </div>
+        <div class="hero-meta-item">
+          <label>Status</label>
+          <span>🟢 Launching</span>
+        </div>
+      </div>
     </div>
   </div>
 </div>
 
 <!-- OVERVIEW -->
-<div class="container">
-  <section>
-    <div class="section-label">Overview</div>
-    <h2>A platform that connects patients, doctors, and universities</h2>
-    <p>EMDEU is a digital telehealth integration platform designed for the CIS healthcare market. The product allows patients to view medical records, book appointments at both private and state clinics, and track health indicators — all in one place.</p>
-    <p>I was brought in to redesign the existing experience across three distinct products: the patient mobile app, the medical staff admin panel with a full ICD-10 patient registry, and a lightweight psychological testing tool for universities.</p>
+<div id="overview">
+  <div class="container">
+    <section>
+      <div class="section-label">Overview</div>
+      <h2>One platform connecting patients, doctors & universities</h2>
+      <p>EMDEU is a digital telehealth integration platform designed for the CIS healthcare market. Patients can view medical records, track health indicators, and book appointments at both private and state clinics — all in one app.</p>
+      <p>I designed three distinct products within this ecosystem: a patient-facing mobile app, a full medical admin panel with an ICD-10 patient registry, and a lightweight psychological testing tool deployed across three medical universities.</p>
 
-    <div class="stats">
-      <div class="stat">
-        <span class="stat-num">3</span>
-        <span class="stat-label">Products designed</span>
-      </div>
-      <div class="stat">
-        <span class="stat-num">3</span>
-        <span class="stat-label">Universities integrated</span>
-      </div>
-      <div class="stat">
-        <span class="stat-num">18</span>
-        <span class="stat-label">ICD-10 categories covered</span>
-      </div>
-    </div>
-
-    <div class="product-tabs">
-      <div class="product-tab active">
-        <span class="product-icon">📱</span>
-        <h4>Patient App</h4>
-        <p>iOS mobile app for booking, health tracking & teleconsultation</p>
-      </div>
-      <div class="product-tab">
-        <span class="product-icon">🖥️</span>
-        <h4>Admin Panel</h4>
-        <p>Doctor workspace with full ICD-10 patient registry</p>
-      </div>
-      <div class="product-tab">
-        <span class="product-icon">🎓</span>
-        <h4>University Tool</h4>
-        <p>Lightweight psych testing app for 3 medical universities</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- PROBLEM -->
-  <section>
-    <div class="section-label">Problem</div>
-    <h2>Three products, three different pain points</h2>
-
-    <div class="problem-grid">
-      <div class="problem-card">
-        <h4>Problem 01 · Patient App</h4>
-        <p>The existing app had poor UX flow with an outdated interface. The primary users are elderly patients — a demographic that requires simplified navigation and larger, clearer UI elements.</p>
-      </div>
-      <div class="problem-card">
-        <h4>Problem 02 · Admin Panel</h4>
-        <p>Doctors were working with a visually overwhelming interface. All 18 ICD-10 medical directions were scattered — there was no unified view, and navigation was exhausting for daily clinical work.</p>
-      </div>
-      <div class="problem-card full">
-        <h4>Problem 03 · University Tool</h4>
-        <p>Three medical universities needed a psychological testing tool for students but couldn't afford custom development. They needed a simple, frictionless experience — no registration, no complexity, just guide the student from question A to result B.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- PROCESS -->
-  <section>
-    <div class="section-label">Design Process</div>
-    <h2>Key design decisions</h2>
-    <p>Each product required a different design approach. Here are the decisions that mattered most:</p>
-
-    <ul class="decision-list">
-      <li>
-        <span class="decision-num">01</span>
-        <div class="decision-content">
-          <h4>Designing for elderly users first</h4>
-          <p>The primary patient audience is older adults. I simplified the navigation flow, increased touch targets, used clear iconography with labels, and kept the visual hierarchy calm and uncluttered. If an elderly user can do it easily, anyone can.</p>
+      <div class="stats">
+        <div class="stat">
+          <span class="stat-num">3</span>
+          <span class="stat-label">Products designed end-to-end</span>
         </div>
-      </li>
-      <li>
-        <span class="decision-num">02</span>
-        <div class="decision-content">
-          <h4>Accessibility built-in from day one</h4>
-          <p>In the admin panel, I added a dedicated accessibility mode for colorblind doctors and visually impaired medical staff — because it turned out some of EMDEU's actual users needed it. This wasn't an afterthought; it became a core feature.</p>
+        <div class="stat">
+          <span class="stat-num">18</span>
+          <span class="stat-label">ICD-10 categories in registry</span>
         </div>
-      </li>
-      <li>
-        <span class="decision-num">03</span>
-        <div class="decision-content">
-          <h4>Unified registry: 18 directions in one interface</h4>
-          <p>Instead of separate screens per ICD-10 category, I designed a single unified workspace where doctors can split or merge patient record pages. This dramatically reduced the number of clicks needed for daily clinical documentation.</p>
+        <div class="stat">
+          <span class="stat-num">3</span>
+          <span class="stat-label">Universities integrated</span>
         </div>
-      </li>
-      <li>
-        <span class="decision-num">04</span>
-        <div class="decision-content">
-          <h4>Zero-friction university tool</h4>
-          <p>For the student testing app, no registration, no onboarding, no distractions. Open the app → answer the questionnaire → see the result. The entire UX was designed around removing every possible barrier between student and test completion.</p>
-        </div>
-      </li>
-    </ul>
-  </section>
+      </div>
 
-  <!-- SCREENS -->
-  <section>
-    <div class="section-label">Solution · Patient App</div>
-    <h2>Clean, calm, and built for real people</h2>
-    <p>The redesigned patient app focuses on clarity. The home screen gives a personalised health status at a glance, easy access to specialists by category, and one-tap entry to teleconsultation. Health trackers show data visually with historical trends. Appointment confirmation is minimal — just the essential information a patient needs before a call.</p>
-
-    <div class="highlight">
-      <p>The waiting screen before a teleconsultation was designed to <strong>reduce anxiety</strong> — a timer, clear date and time, doctor's name, and a single action button. Nothing else. For patients calling a doctor remotely for the first time, this clarity is everything.</p>
-    </div>
-  </section>
+      <div class="product-tabs">
+        <div class="product-tab">
+          <span class="product-icon">📱</span>
+          <h4>Patient Mobile App</h4>
+          <p>iOS app for health tracking, booking, and teleconsultation — designed for elderly users first.</p>
+        </div>
+        <div class="product-tab">
+          <span class="product-icon">🖥️</span>
+          <h4>Medical Admin Panel</h4>
+          <p>Doctor workspace with full ICD-10 patient registry, accessibility mode, and unified record management.</p>
+        </div>
+        <div class="product-tab">
+          <span class="product-icon">🎓</span>
+          <h4>University Testing Tool</h4>
+          <p>Zero-friction psychological questionnaire app for 3 medical universities. No registration, no barriers.</p>
+        </div>
+      </div>
+    </section>
+  </div>
 </div>
 
-<!-- RESULT -->
-<div class="result-section">
-  <div class="container">
-    <div class="section-label">Result</div>
-    <h2>Three products ready to launch across CIS</h2>
-    <p>All three products are currently at the launch stage. EMDEU's platform will serve patients, medical professionals, and university students across Kazakhstan and broader CIS markets.</p>
-    <p>This project pushed me to think beyond screens — understanding clinical workflows, patient psychology, accessibility needs, and the constraints of underfunded university systems all shaped the final designs.</p>
+<div class="section-divider"></div>
 
-    <div class="result-tags">
-      <span class="result-tag">UI/UX Design</span>
-      <span class="result-tag">Mobile App</span>
-      <span class="result-tag">Admin Panel</span>
-      <span class="result-tag">Accessibility</span>
-      <span class="result-tag">Healthcare</span>
-      <span class="result-tag">ICD-10 Registry</span>
-      <span class="result-tag">CIS Market</span>
-      <span class="result-tag">Figma</span>
+<!-- PROBLEM -->
+<div id="problem">
+  <div class="container">
+    <section>
+      <div class="section-label">Problem</div>
+      <h2>Three products.<br>Three different pain points.</h2>
+
+      <div class="problem-grid">
+        <div class="problem-card">
+          <span class="problem-num">1</span>
+          <h4>Problem · Patient App</h4>
+          <p>The existing app had a confusing UX flow and outdated visual design. The primary users are elderly patients — a demographic that demands simplified navigation, larger touch targets, and a calm, trustworthy interface.</p>
+        </div>
+        <div class="problem-card">
+          <span class="problem-num">2</span>
+          <h4>Problem · Admin Panel</h4>
+          <p>Doctors were stuck with a visually overwhelming interface. All 18 ICD-10 medical directions were scattered across disconnected screens. Daily clinical work was slow and error-prone. Some doctors are colorblind — the old interface had no accessibility support.</p>
+        </div>
+        <div class="problem-card full">
+          <span class="problem-num">3</span>
+          <h4>Problem · University Tool</h4>
+          <p>Three medical universities — ZKMU, Medical University of Semey, and the Republican Scientific-Practical Center of Mental Health — needed a psychological testing tool for students but couldn't afford custom development. They needed a simple, frictionless experience: no registration, no complex onboarding, just guide the student from question to result.</p>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+
+<!-- SCREENS -->
+<div id="screens" class="screens-section">
+  <div class="container">
+    <div class="section-label">Solution</div>
+    <h2>Screens across three products</h2>
+    <p>Each product has a distinct visual language — calm and personal for patients, structured and professional for doctors, minimal and frictionless for students.</p>
+
+    <!-- Mobile App -->
+    <div class="screens-label">Product 01 · Patient Mobile App</div>
+    <div class="mobile-screens">
+      <div class="mobile-screen">
+        <img src="images/app-home.png" alt="Home screen">
+        <div class="screen-caption">Home — personalised dashboard</div>
+      </div>
+      <div class="mobile-screen">
+        <img src="images/app-tracker.png" alt="Health tracker">
+        <div class="screen-caption">Tracker — all vitals at a glance</div>
+      </div>
+      <div class="mobile-screen">
+        <img src="images/app-specialists.png" alt="Specialists list">
+        <div class="screen-caption">Specialists — by category</div>
+      </div>
+      <div class="mobile-screen">
+        <img src="images/app-booking.png" alt="Booking screen">
+        <div class="screen-caption">Booking — calendar + time slots</div>
+      </div>
+      <div class="mobile-screen">
+        <img src="images/app-waiting.png" alt="Waiting screen">
+        <div class="screen-caption">Pre-consultation — countdown</div>
+      </div>
+    </div>
+
+    <!-- Admin Panel -->
+    <div class="screens-label">Product 02 · Medical Admin Panel</div>
+    <div class="desktop-screen">
+      <img src="images/admin-registry.png" alt="ICD-10 Registry">
+      <div class="screen-caption" style="color:rgba(255,255,255,0.35);padding:16px 20px;">ICD-10 Registry — all 18 directions unified in one interface + accessibility mode in header</div>
+    </div>
+    <div class="desktop-grid">
+      <div class="desktop-screen">
+        <img src="images/admin-patients.png" alt="Patient list">
+        <div class="screen-caption" style="color:rgba(255,255,255,0.35);padding:16px 20px;">Patient registry with search and filters</div>
+      </div>
+      <div class="desktop-screen">
+        <img src="images/admin-identification.png" alt="Patient identification">
+        <div class="screen-caption" style="color:rgba(255,255,255,0.35);padding:16px 20px;">Patient identification — demographics & BMI</div>
+      </div>
+    </div>
+    <div class="desktop-screen">
+      <img src="images/admin-examination.png" alt="Patient examination">
+      <div class="screen-caption" style="color:rgba(255,255,255,0.35);padding:16px 20px;">Symptom assessment with interactive body map — doctors tap joints directly on the diagram</div>
+    </div>
+
+    <!-- University tool -->
+    <div class="screens-label">Product 03 · University Psychological Testing Tool (Seziný)</div>
+    <div class="uni-screens">
+      <div class="mobile-screen">
+        <img src="images/uni-home.png" alt="Questionnaire list">
+        <div class="screen-caption">Home — list of questionnaires with time estimates</div>
+      </div>
+      <div class="mobile-screen">
+        <img src="images/uni-question.png" alt="Question screen">
+        <div class="screen-caption">Question — clear progress, large tap targets</div>
+      </div>
+      <div class="mobile-screen">
+        <img src="images/uni-result.png" alt="Result screen">
+        <div class="screen-caption">Result — calm, supportive feedback</div>
+      </div>
     </div>
   </div>
 </div>
 
+<!-- DECISIONS -->
+<div id="decisions" class="decisions">
+  <div class="container">
+    <section>
+      <div class="section-label">Design Thinking</div>
+      <h2>The decisions that shaped the outcome</h2>
+
+      <ul class="decision-list">
+        <li>
+          <span class="decision-num">01</span>
+          <div class="decision-content">
+            <h4>Designing for elderly users — then scaling up</h4>
+            <p>The patient app's primary audience is older adults managing chronic conditions. I simplified navigation to the fewest possible steps, used large touch targets, clear iconography with text labels, and a calm blue-white palette that signals trust. The logic: if an elderly user with low digital literacy can navigate confidently, any user can.</p>
+          </div>
+        </li>
+        <li>
+          <span class="decision-num">02</span>
+          <div class="decision-content">
+            <h4>Accessibility as a core feature, not an afterthought</h4>
+            <p>During the project I learned that some of EMDEU's actual medical staff are colorblind or visually impaired. I added a dedicated accessibility mode toggle in the admin panel header — visible on every screen. This wasn't a checkbox requirement; it came from understanding the real users.</p>
+          </div>
+        </li>
+        <li>
+          <span class="decision-num">03</span>
+          <div class="decision-content">
+            <h4>18 ICD-10 directions in one unified workspace</h4>
+            <p>The previous admin panel had no unified view — doctors had to jump between disconnected screens to manage different medical directions. I redesigned the registry as a single dashboard where all 18 ICD-10 categories are accessible from one place, with the ability to split or merge patient record pages. Clinical documentation that used to require many clicks now flows in one workspace.</p>
+          </div>
+        </li>
+        <li>
+          <span class="decision-num">04</span>
+          <div class="decision-content">
+            <h4>Interactive body diagram for symptom mapping</h4>
+            <p>For the rheumatology module, doctors need to mark exactly which joints are painful or swollen. Instead of a dropdown list (slow, error-prone), I designed an interactive body diagram where doctors tap directly on the affected areas. Front and back views, clickable joints — clinical precision with minimal effort.</p>
+          </div>
+        </li>
+        <li>
+          <span class="decision-num">05</span>
+          <div class="decision-content">
+            <h4>Zero-friction student testing: point A to point B</h4>
+            <p>For the university tool (Seziný), the entire UX principle was remove every barrier. No registration, no account, no unnecessary screens. Open the app — see the questionnaires — answer — get the result. The calm visual design (soft backgrounds, generous spacing) was intentional: psychological questionnaires are sensitive, and the interface should feel safe and non-clinical.</p>
+          </div>
+        </li>
+      </ul>
+
+      <div class="highlight">
+        <p>The pre-consultation waiting screen was designed to <strong>reduce patient anxiety</strong>. For many users this is their first-ever teleconsultation. Showing exactly how many minutes until the call, the date, the time, and the doctor's name — with a single clear action button — removes every possible source of confusion at the most critical moment.</p>
+      </div>
+    </section>
+  </div>
+</div>
+
+<!-- RESULT -->
+<div id="result" class="result-section">
+  <div class="container">
+    <div class="section-label">Result</div>
+    <h2>Three products.<br>One coherent ecosystem.</h2>
+    <p>All three products are at the launch stage. EMDEU's platform is set to serve patients, medical professionals, and university students across Kazakhstan and the broader CIS market.</p>
+    <p>This project required more than UX skills — I had to understand clinical workflows, patient psychology, the daily reality of overworked doctors, and the budget constraints of public universities. Every design decision came from that context.</p>
+
+    <div class="result-tags">
+      <span class="result-tag">UI/UX Design</span>
+      <span class="result-tag">Mobile App (iOS)</span>
+      <span class="result-tag">Web Admin Panel</span>
+      <span class="result-tag">Accessibility</span>
+      <span class="result-tag">Healthcare</span>
+      <span class="result-tag">ICD-10 Registry</span>
+      <span class="result-tag">Telehealth</span>
+      <span class="result-tag">CIS Market</span>
+      <span class="result-tag">Elderly UX</span>
+      <span class="result-tag">Figma</span>
+      <span class="result-tag">Enterprise Product</span>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
 <div class="case-footer">
-  <p>Designed by <a href="https://behance.net/aldiyarkussainov">Aldiyar Kussainov</a> · UI/UX Designer · Astana, Kazakhstan · <a href="tel:+77001616026">+7 700 161 60 26</a></p>
+  <p>Designed by <a href="https://behance.net/aldiyarkussainov">Aldiyar Kussainov</a> · UI/UX Designer & COO · Astana, Kazakhstan</p>
+  <p><a href="tel:+77001616026">+7 700 161 60 26</a> &nbsp;·&nbsp; <a href="https://behance.net/aldiyarkussainov">Behance</a> &nbsp;·&nbsp; <a href="https://linkedin.com/in/aldiyar-kussainov-b4b3b3371">LinkedIn</a></p>
 </div>
 
 </body>
