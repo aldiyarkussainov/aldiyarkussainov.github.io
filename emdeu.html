@@ -1,0 +1,1146 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EMDEU Telehealth — Aldiyar Kussainov</title>
+<meta name="description" content="Telehealth ecosystem for the CIS market. 4 products, 199 screens, solo designer.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --bg: #FAFAF7;
+  --ink: #0A0A0A;
+  --ink-soft: #2A2A2A;
+  --muted: #6B7280;
+  --line: #E8E8E2;
+  --accent: #3568FF;
+  --accent-hover: #2854E5;
+
+  --dark-bg: #0A0A0A;
+  --dark-bg-soft: #1A1A1A;
+  --dark-ink: #FAFAF7;
+  --dark-muted: #8B8B85;
+  --dark-line: rgba(255,255,255,0.08);
+
+  --sans: 'Geist', -apple-system, BlinkMacSystemFont, sans-serif;
+  --mono: 'JetBrains Mono', ui-monospace, monospace;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--sans);
+  background: var(--bg);
+  color: var(--ink);
+  font-weight: 400;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+a { color: inherit; text-decoration: none; }
+img { display: block; max-width: 100%; }
+
+/* ===== NAV ===== */
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 18px 48px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(250, 250, 247, 0.86);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--line);
+}
+.nav-logo { font-size: 15px; font-weight: 600; letter-spacing: -0.01em; }
+.nav-logo .sig { width: 26px; color: var(--ink); }
+.nav-right { display: flex; gap: 28px; align-items: center; font-size: 13px; }
+.nav-back {
+  color: var(--muted);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: color 0.2s ease, gap 0.2s ease;
+}
+.nav-back:hover { color: var(--ink); gap: 12px; }
+.nav-back .arr { font-family: var(--mono); }
+.lang-switch {
+  display: flex;
+  gap: 10px;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  padding-left: 24px;
+  border-left: 1px solid var(--line);
+}
+.lang-switch a { color: var(--muted); transition: color 0.2s ease; }
+.lang-switch a.active { color: var(--ink); }
+.lang-switch a:hover { color: var(--ink); }
+
+/* ===== Section number ===== */
+.section-num {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  color: var(--muted);
+  text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+.section-num strong { color: var(--ink); font-weight: 500; }
+.section-num::before {
+  content: "";
+  display: block;
+  width: 24px;
+  height: 1px;
+  background: var(--ink);
+}
+
+/* ===== Container ===== */
+.wrap {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 48px;
+}
+
+/* ===== HERO ===== */
+.hero {
+  padding: 140px 0 60px;
+}
+.hero-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 22px;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  color: var(--muted);
+  text-transform: uppercase;
+  margin-bottom: 32px;
+}
+.hero-meta span { display: inline-flex; align-items: center; gap: 22px; }
+.hero-meta span + span::before {
+  content: "·";
+  color: var(--line);
+}
+.hero-title {
+  font-size: clamp(48px, 9vw, 128px);
+  font-weight: 700;
+  line-height: 0.96;
+  letter-spacing: -0.04em;
+  margin-bottom: 40px;
+  max-width: 1100px;
+}
+.hero-title .light { color: var(--muted); font-weight: 300; }
+.hero-sub {
+  font-size: clamp(18px, 1.5vw, 22px);
+  line-height: 1.5;
+  color: var(--ink-soft);
+  max-width: 720px;
+  margin-bottom: 64px;
+}
+
+.hero-cover {
+  width: 100%;
+  aspect-ratio: 16/9;
+  background: var(--line);
+  border-radius: 16px;
+  overflow: hidden;
+}
+.hero-cover img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ===== OVERVIEW ===== */
+.overview {
+  padding: 80px 0 60px;
+}
+.overview-facts {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 40px;
+  padding-bottom: 48px;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 48px;
+}
+.fact-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  color: var(--muted);
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.fact-value {
+  font-size: 17px;
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+}
+.overview-text {
+  display: grid;
+  grid-template-columns: 0.7fr 1.6fr;
+  gap: 80px;
+}
+.overview-text h2 {
+  font-size: clamp(32px, 4vw, 48px);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+}
+.overview-text p {
+  font-size: 18px;
+  line-height: 1.6;
+  color: var(--ink-soft);
+  margin-bottom: 18px;
+}
+.overview-text p:last-child { margin-bottom: 0; }
+
+/* ===== Section heading shared ===== */
+.section {
+  padding: 80px 0;
+  border-top: 1px solid var(--line);
+}
+.section-head {
+  display: grid;
+  grid-template-columns: 0.7fr 1.6fr;
+  gap: 80px;
+  margin-bottom: 56px;
+  align-items: flex-start;
+}
+.section-head h2 {
+  font-size: clamp(32px, 4vw, 48px);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+}
+.section-head p {
+  font-size: 17px;
+  line-height: 1.65;
+  color: var(--ink-soft);
+  max-width: 640px;
+}
+.section-head p + p { margin-top: 16px; }
+
+/* ===== Before / After ===== */
+.compare {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-bottom: 64px;
+}
+.compare-col-label {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  color: var(--muted);
+  text-transform: uppercase;
+  margin-bottom: 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+.compare-col-label::before {
+  content: "";
+  display: block;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--muted);
+}
+.compare-col-label.is-new::before { background: var(--accent); }
+.compare-col-label.is-new { color: var(--accent); }
+
+.compare-frame {
+  width: 100%;
+  aspect-ratio: 9/19;
+  background: var(--line);
+  border-radius: 24px;
+  overflow: hidden;
+}
+.compare-frame img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Changes list */
+.changes-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 40px 56px;
+  padding-top: 8px;
+}
+.change-item h3 {
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  margin-bottom: 8px;
+}
+.change-item p {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--muted);
+}
+.change-num {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  color: var(--accent);
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+
+/* ===== Architecture ===== */
+.arch-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+.arch-card {
+  padding: 32px 28px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  background: rgba(255,255,255,0.4);
+}
+.arch-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+}
+.arch-card-num {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  color: var(--muted);
+  text-transform: uppercase;
+}
+.arch-card-screens {
+  font-size: 36px;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1;
+}
+.arch-card-screens span {
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--muted);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-left: 6px;
+}
+.arch-card h3 {
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+.arch-card p {
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--muted);
+}
+
+/* ===== Screen gallery ===== */
+.screens-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+  margin-bottom: 22px;
+}
+.screens-row.cols-4 { grid-template-columns: repeat(4, 1fr); gap: 18px; }
+.screens-row.cols-2 { grid-template-columns: repeat(2, 1fr); gap: 24px; }
+
+.screen-frame {
+  width: 100%;
+  aspect-ratio: 9/19;
+  background: var(--line);
+  border-radius: 22px;
+  overflow: hidden;
+}
+.screen-frame.web { aspect-ratio: 14/9; border-radius: 12px; }
+.screen-frame img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.screen-caption {
+  margin-top: 12px;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+  text-transform: uppercase;
+}
+
+/* ===== Sketches ===== */
+.sketches {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+.sketch-frame {
+  width: 100%;
+  aspect-ratio: 4/3;
+  background: var(--line);
+  border-radius: 14px;
+  overflow: hidden;
+}
+.sketch-frame img { width: 100%; height: 100%; object-fit: cover; }
+
+/* ===== Learned ===== */
+.learned-stmt {
+  font-size: clamp(28px, 4vw, 48px);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+  max-width: 980px;
+  margin-bottom: 40px;
+}
+.learned-stmt .light { color: var(--muted); font-weight: 300; }
+.learned-text {
+  display: grid;
+  grid-template-columns: 0.7fr 1.6fr;
+  gap: 80px;
+}
+.learned-text > div:first-child {
+  /* empty spacer column on desktop */
+}
+.learned-text p {
+  font-size: 17px;
+  line-height: 1.65;
+  color: var(--ink-soft);
+  max-width: 640px;
+  margin-bottom: 16px;
+}
+
+/* ===== Next project ===== */
+.next-project {
+  padding: 100px 0 60px;
+  border-top: 1px solid var(--line);
+}
+.next-link {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 32px;
+  transition: opacity 0.2s ease;
+}
+.next-link:hover { opacity: 0.7; }
+.next-link-meta { flex: 1; }
+.next-link-label {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  color: var(--muted);
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+.next-link-title {
+  font-size: clamp(40px, 6vw, 84px);
+  font-weight: 700;
+  line-height: 0.98;
+  letter-spacing: -0.035em;
+  transition: color 0.2s ease;
+}
+.next-link:hover .next-link-title { color: var(--accent); }
+.next-link-arrow {
+  font-family: var(--mono);
+  font-size: clamp(40px, 6vw, 84px);
+  font-weight: 300;
+  color: var(--accent);
+  line-height: 1;
+  transition: transform 0.3s ease;
+}
+.next-link:hover .next-link-arrow { transform: translateX(12px); }
+
+/* ===== DARK FOOTER (same as index) ===== */
+.contact-footer { background: var(--dark-bg); color: var(--dark-ink); padding: 140px 48px 56px; margin-top: 80px; }
+.contact-footer-inner { max-width: 1280px; margin: 0 auto; }
+.cf-title {
+  font-size: clamp(56px, 9vw, 140px);
+  font-weight: 700;
+  line-height: 0.95;
+  letter-spacing: -0.045em;
+  margin-bottom: 80px;
+}
+.cf-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr 1fr;
+  gap: 56px;
+  padding-top: 56px;
+  border-top: 1px solid var(--dark-line);
+}
+.cf-direct a {
+  display: block;
+  font-size: clamp(22px, 2.5vw, 32px);
+  font-weight: 500;
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+  color: var(--dark-ink);
+  margin-bottom: 8px;
+  transition: color 0.2s ease;
+}
+.cf-direct a:hover { color: var(--accent); }
+.cf-col-label {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  color: var(--dark-muted);
+  margin-bottom: 24px;
+}
+.cf-col ul { list-style: none; }
+.cf-col li { margin-bottom: 14px; }
+.cf-col li a {
+  font-size: 15px;
+  color: var(--dark-ink);
+  transition: color 0.2s ease;
+}
+.cf-col li a:hover { color: var(--accent); }
+.cf-col li.address { font-size: 14px; opacity: 0.85; line-height: 1.5; }
+.cf-bottom {
+  margin-top: 100px;
+  padding-top: 28px;
+  border-top: 1px solid var(--dark-line);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  color: var(--dark-muted);
+  text-transform: uppercase;
+}
+.cf-bottom .sig-foot { width: 22px; height: auto; opacity: 0.7; vertical-align: -3px; margin-right: 8px; color: var(--dark-ink); }
+
+/* ===== Reveal ===== */
+.reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal[data-delay="1"] { transition-delay: 0.08s; }
+.reveal[data-delay="2"] { transition-delay: 0.16s; }
+.reveal[data-delay="3"] { transition-delay: 0.24s; }
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+}
+
+/* ===== MOBILE ===== */
+@media (max-width: 900px) {
+  .nav { padding: 14px 20px; }
+  .nav-right { gap: 16px; font-size: 12px; }
+  .lang-switch { padding-left: 16px; }
+
+  .wrap { padding: 0 20px; }
+  .hero { padding: 100px 0 40px; }
+  .hero-meta { gap: 12px; }
+  .hero-meta span + span::before { display: none; }
+  .hero-sub { margin-bottom: 36px; }
+
+  .overview { padding: 60px 0 40px; }
+  .overview-facts {
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    padding-bottom: 32px;
+    margin-bottom: 32px;
+  }
+  .overview-text, .section-head, .learned-text {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .section { padding: 60px 0; }
+  .section-head { margin-bottom: 36px; }
+
+  .compare { gap: 14px; margin-bottom: 40px; }
+  .changes-list { grid-template-columns: 1fr; gap: 28px; }
+
+  .arch-grid { grid-template-columns: 1fr; gap: 16px; }
+  .arch-card { padding: 24px 20px; }
+
+  .screens-row {
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+  .screens-row.cols-4 { grid-template-columns: 1fr 1fr; }
+  .screens-row.cols-2 { grid-template-columns: 1fr 1fr; gap: 14px; }
+
+  .sketches { grid-template-columns: 1fr 1fr; gap: 14px; }
+
+  .next-link { flex-direction: row; align-items: center; }
+  .next-link-arrow { font-size: 40px; }
+
+  .contact-footer { padding: 70px 24px 32px; }
+  .cf-grid { grid-template-columns: 1fr; gap: 36px; padding-top: 36px; }
+  .cf-bottom {
+    margin-top: 50px;
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- ========== NAV ========== -->
+<nav class="nav">
+  <a href="index.html" class="nav-logo" aria-label="Home">
+    <svg class="sig" viewBox="0 0 32 25" fill="currentColor" xmlns="http://www.w3.org/2000/svg" style="width:26px;height:auto">
+      <path fill-rule="evenodd" clip-rule="evenodd" d="M23.2165 24.0702L29.5445 23.1211C29.6859 23.0989 29.7795 23.0606 29.5254 23.0385L23.1554 22.4783C23.0462 22.4664 22.9359 22.4781 22.8311 22.5126C22.7263 22.5472 22.6293 22.6039 22.546 22.6794C22.4628 22.7548 22.3949 22.8473 22.3466 22.9513C22.2984 23.0554 22.2707 23.1687 22.2653 23.2843C22.2735 23.4046 22.3055 23.5217 22.3592 23.6281C22.4129 23.7346 22.4871 23.828 22.577 23.9024C22.667 23.9768 22.7707 24.0305 22.8815 24.0601C22.9922 24.0897 23.1077 24.0945 23.2203 24.0742L23.2165 24.0702ZM13.246 24.6667H1.09042C0.150675 24.6667 -0.328749 23.8304 0.253818 22.9478L4.11977 17.104C4.66431 18.1619 5.33934 19.139 6.12724 20.0098C7.61518 21.6521 9.81747 22.0027 11.676 23.1171C12.4457 23.5765 12.9882 24.0863 13.2422 24.6626L13.246 24.6667ZM16.814 24.6667H15.1847C15.4311 23.3286 14.9059 22.2647 13.6834 21.6279L15.9984 19.764L18.3115 21.6279C17.091 22.2607 16.5657 23.3246 16.8083 24.6626L16.814 24.6667ZM27.879 17.094L31.7449 22.9478C32.3294 23.8304 31.85 24.6667 30.9102 24.6667H18.7527C19.0068 24.0904 19.5492 23.5825 20.319 23.1211C22.1794 22.0068 24.3817 21.6561 25.8696 20.0138C26.6576 19.1369 27.332 18.1537 27.8752 17.0899L27.879 17.094ZM15.9984 0C16.2344 0.0129996 16.464 0.0845599 16.6688 0.208862C16.8736 0.333164 17.0477 0.506699 17.1769 0.715355L24.4714 11.9354L26.2726 14.6618C25.5392 18.2587 23.2872 20.1287 20.9989 20.1488C19.448 20.1629 16.3518 18.9579 16.8159 14.5872C16.9286 13.5293 17.8454 12.2779 19.0125 12.2235C20.126 12.1711 21.2052 12.9187 21.3408 14.1056C21.5433 15.8829 19.8434 16.8018 18.9113 17.2955C20.2101 17.8033 21.3466 17.632 22.2023 16.8925C22.5846 16.5456 22.8866 16.111 23.0852 15.622C23.2839 15.1331 23.3739 14.6026 23.3483 14.0713C23.3355 13.3336 23.1222 12.6153 22.7339 12.0016C22.3455 11.3879 21.7984 10.9048 21.1575 10.6094C20.1413 10.1339 18.9093 10.0472 17.6678 10.3374C17.6678 8.94295 17.2075 7.43567 15.9984 5.87599C14.7893 7.43567 14.3252 8.94295 14.3252 10.3374C13.0913 10.0472 11.8421 10.1359 10.8432 10.6215C10.2029 10.9171 9.65656 11.4005 9.26919 12.0143C8.88182 12.628 8.6697 13.3462 8.65807 14.0834C8.63099 14.6138 8.71913 15.1436 8.91576 15.6326C9.11239 16.1215 9.41232 16.5566 9.79264 16.9046C10.6503 17.634 11.7848 17.8053 13.0856 17.3076C12.1516 16.8139 10.4535 15.897 10.656 14.1177C10.7897 12.9308 11.8689 12.1832 12.9843 12.2356C14.1514 12.29 15.0682 13.5414 15.179 14.5993C15.6431 18.9579 12.5469 20.1629 10.9979 20.1509C8.70582 20.1307 6.45577 18.2607 5.72422 14.6638L7.52349 11.9374L14.8199 0.715355C14.9491 0.506699 15.1232 0.333164 15.328 0.208862C15.5328 0.0845599 15.7625 0.0129996 15.9984 0ZM8.78604 24.0702L2.45993 23.1211C2.31859 23.0989 2.22309 23.0606 2.47903 23.0385L8.84907 22.4783C8.95826 22.4664 9.06861 22.4781 9.17337 22.5126C9.27814 22.5472 9.37513 22.6039 9.45842 22.6794C9.54172 22.7548 9.60957 22.8473 9.65783 22.9513C9.7061 23.0554 9.73377 23.1687 9.73916 23.2843C9.7304 23.404 9.69809 23.5205 9.64431 23.6263C9.59052 23.7321 9.51644 23.8249 9.42677 23.8989C9.33711 23.9728 9.23382 24.0262 9.12351 24.0557C9.01319 24.0852 8.89826 24.0901 8.78604 24.0702Z"/>
+    </svg>
+  </a>
+  <div class="nav-right">
+    <a href="index.html" class="nav-back"><span class="arr">←</span> All works</a>
+    <div class="lang-switch">
+      <a href="emdeu.html" class="active">RU</a>
+      <a href="/en/emdeu.html">EN</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ========== HERO ========== -->
+<header class="hero">
+  <div class="wrap">
+    <div class="hero-meta reveal">
+      <span>Healthcare</span>
+      <span>Telehealth</span>
+      <span>iOS · Web</span>
+      <span>2024–2025</span>
+    </div>
+    <h1 class="hero-title reveal">
+      <span class="light">Telehealth для тех,</span><br>
+      кто работает каждый день.
+    </h1>
+    <p class="hero-sub reveal">Цифровая экосистема EMDEU — четыре продукта в одной платформе: приложение пациента, видеоконсультации, админ-панель врача с реестром МКБ-10, и психо-опросники для трёх медицинских университетов.</p>
+    <div class="hero-cover reveal">
+      <!-- <img src="case-emdeu/hero-cover.jpg" alt="EMDEU"> -->
+    </div>
+  </div>
+</header>
+
+<!-- ========== OVERVIEW ========== -->
+<section class="overview">
+  <div class="wrap">
+
+    <div class="overview-facts reveal">
+      <div>
+        <div class="fact-label">Клиент</div>
+        <div class="fact-value">Healthcare<br>(анонимно)</div>
+      </div>
+      <div>
+        <div class="fact-label">Период</div>
+        <div class="fact-value">2024 — 2025<br>в разработке</div>
+      </div>
+      <div>
+        <div class="fact-label">Роль</div>
+        <div class="fact-value">Solo Designer<br>UI / UX</div>
+      </div>
+      <div>
+        <div class="fact-label">Объём</div>
+        <div class="fact-value">199 экранов<br>4 продукта</div>
+      </div>
+    </div>
+
+    <div class="overview-text">
+      <div class="section-num reveal"><strong>00</strong> · Overview</div>
+      <div>
+        <p class="reveal">EMDEU — это не одно приложение, а четыре связанных продукта: пациентское mobile-приложение, модуль видеоконсультаций (телемедицина), веб-админка для врачей с полным реестром МКБ-10 на 18 направлений, и блок психо-опросников, разработанный совместно с тремя медицинскими университетами.</p>
+        <p class="reveal">До меня дизайном занимался другой человек — но только приложением. На момент моего старта у проекта не было единой системы, и каждый продукт жил отдельно. Я пришёл, чтобы собрать всё в одну экосистему: один визуальный язык, одна логика, один пользовательский опыт — для пациента, врача и регистратуры.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ========== CONTEXT (before) ========== -->
+<section class="section">
+  <div class="wrap">
+
+    <div class="section-head">
+      <div>
+        <div class="section-num reveal"><strong>01</strong> · Context</div>
+        <h2 class="reveal">Что было до меня.</h2>
+      </div>
+      <div>
+        <p class="reveal">Старый дизайн делал другой человек, и он работал только над приложением пациента. Визуал был перегружен: тяжёлый шрифт, плоские иллюстрации, агрессивный фиолетовый, мелкий текст. Для медицинского продукта — где аудитория от подростков до пенсионеров — это не работало.</p>
+        <p class="reveal">Главное — не было системы. Каждый экран жил по своим правилам. Когда добавился врач, телемедицина и опросники, стало ясно: нужно начинать с нуля.</p>
+      </div>
+    </div>
+
+    <div class="compare reveal">
+      <div>
+        <div class="compare-col-label">Before</div>
+        <div class="compare-frame">
+          <!-- <img src="case-emdeu/before-1.jpg" alt="Old design"> -->
+        </div>
+      </div>
+      <div>
+        <div class="compare-col-label is-new">After</div>
+        <div class="compare-frame">
+          <!-- <img src="case-emdeu/after-1.jpg" alt="New design"> -->
+        </div>
+      </div>
+    </div>
+
+    <div class="compare reveal">
+      <div>
+        <div class="compare-col-label">Before</div>
+        <div class="compare-frame">
+          <!-- <img src="case-emdeu/before-2.jpg" alt="Old design"> -->
+        </div>
+      </div>
+      <div>
+        <div class="compare-col-label is-new">After</div>
+        <div class="compare-frame">
+          <!-- <img src="case-emdeu/after-2.jpg" alt="New design"> -->
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ========== REDESIGN (changes list) ========== -->
+<section class="section">
+  <div class="wrap">
+
+    <div class="section-head">
+      <div>
+        <div class="section-num reveal"><strong>02</strong> · Redesign</div>
+        <h2 class="reveal">Что я изменил.</h2>
+      </div>
+      <div>
+        <p class="reveal">Четыре направления, которые потянули за собой всё остальное.</p>
+      </div>
+    </div>
+
+    <div class="changes-list">
+      <div class="change-item reveal">
+        <div class="change-num">01</div>
+        <h3>Типографика</h3>
+        <p>Ушёл от агрессивного жирного гротеска. Поставил спокойный шрифт с крупными цифрами — потому что главное в медицинском приложении это давление, пульс, температура. Их должен читать пожилой пациент без очков.</p>
+      </div>
+      <div class="change-item reveal" data-delay="1">
+        <div class="change-num">02</div>
+        <h3>Иллюстрации</h3>
+        <p>Заменил плоские line-иконки на 3D-иллюстрации устройств: тонометр, глюкометр, термометр. Пациент мгновенно понимает что куда — без подписи.</p>
+      </div>
+      <div class="change-item reveal" data-delay="2">
+        <div class="change-num">03</div>
+        <h3>Цвет</h3>
+        <p>Убрал агрессивный фиолетовый. Перешёл на нейтральные медицинские оттенки с одним акцентом. Цвет работает на доверие, не на внимание.</p>
+      </div>
+      <div class="change-item reveal" data-delay="3">
+        <div class="change-num">04</div>
+        <h3>Иерархия</h3>
+        <p>Карточки вместо плоских списков. Воздух между блоками. Крупные тач-таргеты для пожилых пользователей. Пациент находит нужное за 2 секунды, не за 10.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ========== ARCHITECTURE ========== -->
+<section class="section">
+  <div class="wrap">
+
+    <div class="section-head">
+      <div>
+        <div class="section-num reveal"><strong>03</strong> · Architecture</div>
+        <h2 class="reveal">Четыре продукта в одной экосистеме.</h2>
+      </div>
+      <div>
+        <p class="reveal">EMDEU — это не одно приложение, а связка из четырёх. Каждый продукт решает свою задачу, но визуально и логически они говорят на одном языке.</p>
+      </div>
+    </div>
+
+    <div class="arch-grid">
+
+      <div class="arch-card reveal">
+        <div class="arch-card-top">
+          <div class="arch-card-num">01 · Mobile (iOS)</div>
+          <div class="arch-card-screens">110<span>screens</span></div>
+        </div>
+        <h3>Patient App</h3>
+        <p>Основное приложение пациента. Запись на приём, трекер показателей (давление, пульс, температура, вес), история визитов, напоминания.</p>
+      </div>
+
+      <div class="arch-card reveal" data-delay="1">
+        <div class="arch-card-top">
+          <div class="arch-card-num">02 · Mobile + Web</div>
+          <div class="arch-card-screens">50<span>screens</span></div>
+        </div>
+        <h3>Telemedicine</h3>
+        <p>Видеоконсультации с врачом, встроенные в систему МКБ-10. Врач во время сеанса видит карту пациента, может ставить диагноз и выписывать рецепт.</p>
+      </div>
+
+      <div class="arch-card reveal" data-delay="2">
+        <div class="arch-card-top">
+          <div class="arch-card-num">03 · Web</div>
+          <div class="arch-card-screens">19<span>screens</span></div>
+        </div>
+        <h3>Doctor Admin Panel</h3>
+        <p>Веб-админка для врачей. Реестр МКБ-10 на 18 направлений, история пациентов, расписание, ведение приёмов.</p>
+      </div>
+
+      <div class="arch-card reveal" data-delay="3">
+        <div class="arch-card-top">
+          <div class="arch-card-num">04 · Mobile</div>
+          <div class="arch-card-screens">20<span>screens</span></div>
+        </div>
+        <h3>Surveys</h3>
+        <p>Психо-опросники, разработанные совместно с тремя медицинскими университетами. Тесты внедрены в учебный процесс — взамен университеты дали приложению свой клинический контент.</p>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- ========== PATIENT APP ========== -->
+<section class="section">
+  <div class="wrap">
+
+    <div class="section-head">
+      <div>
+        <div class="section-num reveal"><strong>04</strong> · Patient App</div>
+        <h2 class="reveal">110 экранов для пациента.</h2>
+      </div>
+      <div>
+        <p class="reveal">Главный продукт экосистемы. Здесь живёт всё что нужно человеку каждый день: трекер показателей, запись на приём, медицинская карта, напоминания о приёме лекарств.</p>
+        <p class="reveal">Главный вызов — аудитория от подростков до пенсионеров. Решения, которые удобны 25-летним айтишникам, не работают для 65-летних. Поэтому акцент на крупном тексте, читаемых цифрах, понятных иллюстрациях.</p>
+      </div>
+    </div>
+
+    <div class="screens-row reveal">
+      <div>
+        <div class="screen-frame">
+          <!-- <img src="case-emdeu/patient-1.jpg" alt="Welcome"> -->
+        </div>
+        <div class="screen-caption">01 · Welcome</div>
+      </div>
+      <div>
+        <div class="screen-frame">
+          <!-- <img src="case-emdeu/patient-2.jpg" alt="Login"> -->
+        </div>
+        <div class="screen-caption">02 · Login</div>
+      </div>
+      <div>
+        <div class="screen-frame">
+          <!-- <img src="case-emdeu/patient-3.jpg" alt="Tracker"> -->
+        </div>
+        <div class="screen-caption">03 · Tracker</div>
+      </div>
+    </div>
+
+    <div class="screens-row reveal">
+      <div>
+        <div class="screen-frame">
+          <!-- <img src="case-emdeu/patient-4.jpg" alt="Blood pressure"> -->
+        </div>
+        <div class="screen-caption">04 · Blood pressure</div>
+      </div>
+      <div>
+        <div class="screen-frame">
+          <!-- <img src="case-emdeu/patient-5.jpg" alt="Appointments"> -->
+        </div>
+        <div class="screen-caption">05 · Appointments</div>
+      </div>
+      <div>
+        <div class="screen-frame">
+          <!-- <img src="case-emdeu/patient-6.jpg" alt="Profile"> -->
+        </div>
+        <div class="screen-caption">06 · Profile</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ========== TELEMEDICINE ========== -->
+<section class="section">
+  <div class="wrap">
+
+    <div class="section-head">
+      <div>
+        <div class="section-num reveal"><strong>05</strong> · Telemedicine</div>
+        <h2 class="reveal">Видеоконсультация с врачом.</h2>
+      </div>
+      <div>
+        <p class="reveal">Не просто видеозвонок. Это полноценный приём: врач видит карту пациента, его показатели за последний месяц, может ставить диагноз по МКБ-10 и выписывать рецепт прямо во время сеанса.</p>
+        <p class="reveal">Главный вызов — врач должен одновременно общаться с пациентом и работать с интерфейсом. Минимум кликов, всё под рукой, важные функции на главном экране.</p>
+      </div>
+    </div>
+
+    <div class="screens-row reveal">
+      <div>
+        <div class="screen-frame">
+          <!-- <img src="case-emdeu/telemed-1.jpg" alt="Call screen"> -->
+        </div>
+        <div class="screen-caption">01 · Active call</div>
+      </div>
+      <div>
+        <div class="screen-frame">
+          <!-- <img src="case-emdeu/telemed-2.jpg" alt="Patient card"> -->
+        </div>
+        <div class="screen-caption">02 · Patient card</div>
+      </div>
+      <div>
+        <div class="screen-frame">
+          <!-- <img src="case-emdeu/telemed-3.jpg" alt="Prescription"> -->
+        </div>
+        <div class="screen-caption">03 · Prescription</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ========== DOCTOR ADMIN ========== -->
+<section class="section">
+  <div class="wrap">
+
+    <div class="section-head">
+      <div>
+        <div class="section-num reveal"><strong>06</strong> · Doctor Admin</div>
+        <h2 class="reveal">Веб-админка с реестром МКБ-10.</h2>
+      </div>
+      <div>
+        <p class="reveal">Полный реестр МКБ-10 на 18 направлений: терапия, кардиология, неврология, психиатрия, эндокринология и другие. Врач ставит диагноз по официальной классификации, история пациента сохраняется в системе.</p>
+        <p class="reveal">Админка построена так, чтобы врач, который работает с ней каждый день, мог за минуту найти пациента, увидеть его историю и записать приём. Высокая плотность информации, но без визуального шума.</p>
+      </div>
+    </div>
+
+    <div class="screens-row cols-2 reveal">
+      <div>
+        <div class="screen-frame web">
+          <!-- <img src="case-emdeu/admin-1.jpg" alt="Patient list"> -->
+        </div>
+        <div class="screen-caption">01 · Patient list</div>
+      </div>
+      <div>
+        <div class="screen-frame web">
+          <!-- <img src="case-emdeu/admin-2.jpg" alt="ICD-10 registry"> -->
+        </div>
+        <div class="screen-caption">02 · ICD-10 registry</div>
+      </div>
+    </div>
+
+    <div class="screens-row cols-2 reveal">
+      <div>
+        <div class="screen-frame web">
+          <!-- <img src="case-emdeu/admin-3.jpg" alt="Patient card"> -->
+        </div>
+        <div class="screen-caption">03 · Patient card</div>
+      </div>
+      <div>
+        <div class="screen-frame web">
+          <!-- <img src="case-emdeu/admin-4.jpg" alt="Schedule"> -->
+        </div>
+        <div class="screen-caption">04 · Schedule</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ========== SURVEYS ========== -->
+<section class="section">
+  <div class="wrap">
+
+    <div class="section-head">
+      <div>
+        <div class="section-num reveal"><strong>07</strong> · Surveys</div>
+        <h2 class="reveal">Психо-опросники для трёх медвузов.</h2>
+      </div>
+      <div>
+        <p class="reveal">Три медицинских университета внедрили EMDEU в учебный процесс. Их клинические психологи разработали опросники для студентов — Sezini, MMPI, тревожно-депрессивные шкалы — и эти опросники теперь доступны всем пользователям приложения.</p>
+        <p class="reveal">Сделка win-win: университеты получили инструмент для своих студентов, EMDEU получил клинически валидированный контент.</p>
+      </div>
+    </div>
+
+    <div class="screens-row reveal">
+      <div>
+        <div class="screen-frame">
+          <!-- <img src="case-emdeu/survey-1.jpg" alt="Survey list"> -->
+        </div>
+        <div class="screen-caption">01 · Survey list</div>
+      </div>
+      <div>
+        <div class="screen-frame">
+          <!-- <img src="case-emdeu/survey-2.jpg" alt="Question"> -->
+        </div>
+        <div class="screen-caption">02 · Question</div>
+      </div>
+      <div>
+        <div class="screen-frame">
+          <!-- <img src="case-emdeu/survey-3.jpg" alt="Result"> -->
+        </div>
+        <div class="screen-caption">03 · Result</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ========== PROCESS (sketches) ========== -->
+<section class="section">
+  <div class="wrap">
+
+    <div class="section-head">
+      <div>
+        <div class="section-num reveal"><strong>08</strong> · Process</div>
+        <h2 class="reveal">Скетчи до Figma.</h2>
+      </div>
+      <div>
+        <p class="reveal">Из-за сжатых сроков я не делал полноценного research с пациентами — понимание потребностей получал от операционного директора, который ежедневно работает и с врачами, и с клиниками.</p>
+        <p class="reveal">Но каждый сложный экран я сначала набрасывал в скетче — и только потом шёл в Figma. Это экономит часы итераций: сразу видно, работает ли иерархия и логика, ещё до того как ты тратишь время на пиксели.</p>
+      </div>
+    </div>
+
+    <div class="sketches reveal">
+      <div class="sketch-frame">
+        <!-- <img src="case-emdeu/sketch-1.jpg" alt="Sketch"> -->
+      </div>
+      <div class="sketch-frame">
+        <!-- <img src="case-emdeu/sketch-2.jpg" alt="Sketch"> -->
+      </div>
+      <div class="sketch-frame">
+        <!-- <img src="case-emdeu/sketch-3.jpg" alt="Sketch"> -->
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ========== WHAT I LEARNED ========== -->
+<section class="section">
+  <div class="wrap">
+
+    <div class="section-num reveal"><strong>09</strong> · What I learned</div>
+
+    <h2 class="learned-stmt reveal">
+      <span class="light">Главное за этот проект —</span><br>
+      работать структурно.
+    </h2>
+
+    <div class="learned-text">
+      <div></div>
+      <div>
+        <p class="reveal">199 экранов в четырёх связанных продуктах. Один дизайнер. Без структуры это было бы невозможно — каждое решение тянет за собой десятки других экранов, и если меняешь компонент в одном месте, должен быть уверен, что он работает во всех остальных.</p>
+        <p class="reveal">EMDEU научил меня держать систему в голове даже когда нет времени её формализовать. Это не про "правильно по учебнику", а про то, что иначе ты просто утонешь в количестве экранов.</p>
+        <p class="reveal">И ещё — слушать заказчика, но думать за пользователя. Операционный директор видит проект изнутри бизнеса. Врачи — изнутри клинических процессов. Пациенты — изнутри своей боли и тревоги. Хороший дизайнер сшивает все три точки зрения в один продукт.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ========== NEXT PROJECT ========== -->
+<section class="next-project">
+  <div class="wrap">
+    <a href="omarov.html" class="next-link reveal">
+      <div class="next-link-meta">
+        <div class="next-link-label">Next case · 02 / 04</div>
+        <div class="next-link-title">Omarov Dental</div>
+      </div>
+      <div class="next-link-arrow">→</div>
+    </a>
+  </div>
+</section>
+
+<!-- ========== DARK FOOTER ========== -->
+<section class="contact-footer" id="contact">
+  <div class="contact-footer-inner">
+
+    <h2 class="cf-title reveal">Расскажите<br>про проект.</h2>
+
+    <div class="cf-grid reveal" data-delay="1">
+      <div class="cf-direct">
+        <a href="mailto:aldiyar.kuss@gmail.com">aldiyar.kuss@gmail.com</a>
+        <a href="tel:+77001616026">+7 700 161 60 26</a>
+      </div>
+      <div class="cf-col">
+        <div class="cf-col-label">/Nav</div>
+        <ul>
+          <li><a href="index.html">Главная</a></li>
+          <li><a href="index.html#about">Обо мне</a></li>
+          <li><a href="index.html#work">Работы</a></li>
+          <li><a href="index.html#process">Процесс</a></li>
+          <li><a href="index.html#testimonials">Отзывы</a></li>
+        </ul>
+      </div>
+      <div class="cf-col">
+        <div class="cf-col-label">/Social</div>
+        <ul>
+          <li><a href="https://behance.net/aldiyarkussainov" target="_blank" rel="noopener">Behance</a></li>
+          <li><a href="https://linkedin.com/in/aldiyarkussainov" target="_blank" rel="noopener">LinkedIn</a></li>
+          <li><a href="https://t.me/aldiyar_kussainov" target="_blank" rel="noopener">Telegram</a></li>
+          <li><a href="https://wa.me/77001616026" target="_blank" rel="noopener">WhatsApp</a></li>
+        </ul>
+      </div>
+      <div class="cf-col">
+        <div class="cf-col-label">/Based in</div>
+        <ul>
+          <li class="address">
+            Astana, Kazakhstan<br>
+            <span style="opacity:.6">UTC+5</span><br><br>
+            Open to CET / GMT<br>
+            <span style="opacity:.6">timezones</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="cf-bottom">
+      <div>
+        <svg class="sig-foot" viewBox="0 0 32 25" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M23.2165 24.0702L29.5445 23.1211C29.6859 23.0989 29.7795 23.0606 29.5254 23.0385L23.1554 22.4783C23.0462 22.4664 22.9359 22.4781 22.8311 22.5126C22.7263 22.5472 22.6293 22.6039 22.546 22.6794C22.4628 22.7548 22.3949 22.8473 22.3466 22.9513C22.2984 23.0554 22.2707 23.1687 22.2653 23.2843C22.2735 23.4046 22.3055 23.5217 22.3592 23.6281C22.4129 23.7346 22.4871 23.828 22.577 23.9024C22.667 23.9768 22.7707 24.0305 22.8815 24.0601C22.9922 24.0897 23.1077 24.0945 23.2203 24.0742L23.2165 24.0702ZM13.246 24.6667H1.09042C0.150675 24.6667 -0.328749 23.8304 0.253818 22.9478L4.11977 17.104C4.66431 18.1619 5.33934 19.139 6.12724 20.0098C7.61518 21.6521 9.81747 22.0027 11.676 23.1171C12.4457 23.5765 12.9882 24.0863 13.2422 24.6626L13.246 24.6667ZM16.814 24.6667H15.1847C15.4311 23.3286 14.9059 22.2647 13.6834 21.6279L15.9984 19.764L18.3115 21.6279C17.091 22.2607 16.5657 23.3246 16.8083 24.6626L16.814 24.6667ZM27.879 17.094L31.7449 22.9478C32.3294 23.8304 31.85 24.6667 30.9102 24.6667H18.7527C19.0068 24.0904 19.5492 23.5825 20.319 23.1211C22.1794 22.0068 24.3817 21.6561 25.8696 20.0138C26.6576 19.1369 27.332 18.1537 27.8752 17.0899L27.879 17.094ZM15.9984 0C16.2344 0.0129996 16.464 0.0845599 16.6688 0.208862C16.8736 0.333164 17.0477 0.506699 17.1769 0.715355L24.4714 11.9354L26.2726 14.6618C25.5392 18.2587 23.2872 20.1287 20.9989 20.1488C19.448 20.1629 16.3518 18.9579 16.8159 14.5872C16.9286 13.5293 17.8454 12.2779 19.0125 12.2235C20.126 12.1711 21.2052 12.9187 21.3408 14.1056C21.5433 15.8829 19.8434 16.8018 18.9113 17.2955C20.2101 17.8033 21.3466 17.632 22.2023 16.8925C22.5846 16.5456 22.8866 16.111 23.0852 15.622C23.2839 15.1331 23.3739 14.6026 23.3483 14.0713C23.3355 13.3336 23.1222 12.6153 22.7339 12.0016C22.3455 11.3879 21.7984 10.9048 21.1575 10.6094C20.1413 10.1339 18.9093 10.0472 17.6678 10.3374C17.6678 8.94295 17.2075 7.43567 15.9984 5.87599C14.7893 7.43567 14.3252 8.94295 14.3252 10.3374C13.0913 10.0472 11.8421 10.1359 10.8432 10.6215C10.2029 10.9171 9.65656 11.4005 9.26919 12.0143C8.88182 12.628 8.6697 13.3462 8.65807 14.0834C8.63099 14.6138 8.71913 15.1436 8.91576 15.6326C9.11239 16.1215 9.41232 16.5566 9.79264 16.9046C10.6503 17.634 11.7848 17.8053 13.0856 17.3076C12.1516 16.8139 10.4535 15.897 10.656 14.1177C10.7897 12.9308 11.8689 12.1832 12.9843 12.2356C14.1514 12.29 15.0682 13.5414 15.179 14.5993C15.6431 18.9579 12.5469 20.1629 10.9979 20.1509C8.70582 20.1307 6.45577 18.2607 5.72422 14.6638L7.52349 11.9374L14.8199 0.715355C14.9491 0.506699 15.1232 0.333164 15.328 0.208862C15.5328 0.0845599 15.7625 0.0129996 15.9984 0ZM8.78604 24.0702L2.45993 23.1211C2.31859 23.0989 2.22309 23.0606 2.47903 23.0385L8.84907 22.4783C8.95826 22.4664 9.06861 22.4781 9.17337 22.5126C9.27814 22.5472 9.37513 22.6039 9.45842 22.6794C9.54172 22.7548 9.60957 22.8473 9.65783 22.9513C9.7061 23.0554 9.73377 23.1687 9.73916 23.2843C9.7304 23.404 9.69809 23.5205 9.64431 23.6263C9.59052 23.7321 9.51644 23.8249 9.42677 23.8989C9.33711 23.9728 9.23382 24.0262 9.12351 24.0557C9.01319 24.0852 8.89826 24.0901 8.78604 24.0702Z"/>
+        </svg>
+        © 2026 Aldiyar Kussainov
+      </div>
+      <div>UI/UX Designer · Available for projects</div>
+    </div>
+
+  </div>
+</section>
+
+<script>
+(function() {
+  const revealEls = document.querySelectorAll('.reveal');
+  if (revealEls.length) {
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          obs.unobserve(entry.target);
+        }
+      });
+    }, { rootMargin: '0px 0px -10% 0px', threshold: 0.1 });
+    revealEls.forEach(el => obs.observe(el));
+  }
+})();
+</script>
+
+</body>
+</html>
