@@ -1149,23 +1149,44 @@ img { display: block; max-width: 100%; }
     revealEls.forEach(el => revealObs.observe(el));
   }
 
-  // Testimonial client switcher
-  const clients = document.querySelectorAll('.client');
-  const quoteEl = document.getElementById('testimonialQuote');
-  if (clients.length && quoteEl) {
-    clients.forEach(c => {
-      c.addEventListener('click', () => {
-        const newQuote = c.getAttribute('data-quote');
-        if (!newQuote) return;
-        clients.forEach(x => x.classList.remove('active'));
-        c.classList.add('active');
-        quoteEl.style.opacity = '0';
-        setTimeout(() => {
-          quoteEl.textContent = newQuote;
-          quoteEl.style.opacity = '1';
-        }, 220);
-      });
-    });
+  // Testimonial switcher (clicks + dots + swipe)
+  const tClients = document.querySelectorAll('.testimonial-clients .client');
+  const tDots = document.querySelectorAll('.testimonial-dots .dot');
+  const tQuoteEl = document.getElementById('testimonialQuote');
+  const tWrap = document.querySelector('.testimonial-clients');
+
+  const tQuotes = [
+    'Подошёл к задаче глубоко: разобрался в клиническом workflow, поговорил с врачами, и предложил интерфейс, в котором запись пациента сократилась с 15 минут до 2. Не дизайнер ради красоты — дизайнер, который думает о людях, которые будут пользоваться продуктом каждый день.',
+    'За четыре года выстроил единый визуальный стиль платформы и обучил команду из 7 иллюстраторов так, что нам не пришлось переделывать ничего после его ухода. Редкий случай, когда дизайнер думает на уровень выше — про систему, а не про экраны.',
+    'Дизайнер отличный. В плане UI и UX нареканий нет. Работа выполнялась в срок. Так же всегда готов услышать идеи, критику и предложения.'
+  ];
+
+  let tActive = 0;
+  function tSetActive(i) {
+    if (i < 0) i = tQuotes.length - 1;
+    if (i >= tQuotes.length) i = 0;
+    tActive = i;
+    if (tQuoteEl) {
+      tQuoteEl.style.opacity = '0';
+      setTimeout(() => {
+        tQuoteEl.textContent = '"' + tQuotes[i] + '"';
+        tQuoteEl.style.opacity = '1';
+      }, 200);
+    }
+    tClients.forEach((c, idx) => c.classList.toggle('active', idx === i));
+    tDots.forEach((d, idx) => d.classList.toggle('active', idx === i));
+  }
+
+  tClients.forEach((c, i) => c.addEventListener('click', () => tSetActive(i)));
+  tDots.forEach((d, i) => d.addEventListener('click', () => tSetActive(i)));
+
+  if (tWrap) {
+    let tStartX = 0;
+    tWrap.addEventListener('touchstart', e => { tStartX = e.touches[0].clientX; }, {passive: true});
+    tWrap.addEventListener('touchend', e => {
+      const diff = e.changedTouches[0].clientX - tStartX;
+      if (Math.abs(diff) > 50) tSetActive(diff < 0 ? tActive + 1 : tActive - 1);
+    }, {passive: true});
   }
 })();
 </script>
