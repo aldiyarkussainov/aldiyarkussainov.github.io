@@ -1104,24 +1104,48 @@ img { display: block; max-width: 100%; }
     revealEls.forEach(el => revealObs.observe(el));
   }
 
-  // Testimonial client switcher
-  const clients = document.querySelectorAll('.client');
-  const quoteEl = document.getElementById('testimonialQuote');
-  if (clients.length && quoteEl) {
-    clients.forEach(c => {
-      c.addEventListener('click', () => {
-        const newQuote = c.getAttribute('data-quote');
-        if (!newQuote) return;
-        clients.forEach(x => x.classList.remove('active'));
-        c.classList.add('active');
-        quoteEl.style.opacity = '0';
-        setTimeout(() => {
-          quoteEl.textContent = newQuote;
-          quoteEl.style.opacity = '1';
-        }, 220);
-      });
-    });
+ // Testimonial client switcher (with dots + swipe support)
+const clients = document.querySelectorAll('.client');
+const dots = document.querySelectorAll('.testimonial-dots .dot');
+const quoteEl = document.getElementById('testimonialQuote');
+const wrap = document.querySelector('.testimonial-clients');
+let activeIndex = 0;
+
+function setActive(index) {
+  if (index < 0) index = clients.length - 1;
+  if (index >= clients.length) index = 0;
+  activeIndex = index;
+
+  const newQuote = clients[index].getAttribute('data-quote');
+
+  clients.forEach((c, i) => c.classList.toggle('active', i === index));
+  dots.forEach((d, i) => d.classList.toggle('active', i === index));
+
+  if (quoteEl && newQuote) {
+    quoteEl.style.opacity = '0';
+    setTimeout(() => {
+      quoteEl.textContent = newQuote;
+      quoteEl.style.opacity = '1';
+    }, 220);
   }
+}
+
+if (clients.length && quoteEl) {
+  clients.forEach((c, i) => c.addEventListener('click', () => setActive(i)));
+  dots.forEach((d, i) => d.addEventListener('click', () => setActive(i)));
+
+  // Mobile swipe
+  if (wrap) {
+    let startX = 0;
+    wrap.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, {passive: true});
+    wrap.addEventListener('touchend', e => {
+      const diff = e.changedTouches[0].clientX - startX;
+      if (Math.abs(diff) > 50) {
+        setActive(diff < 0 ? activeIndex + 1 : activeIndex - 1);
+      }
+    }, {passive: true});
+  }
+}
 })();
 </script>
 
