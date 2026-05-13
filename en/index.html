@@ -513,6 +513,7 @@ img { display: block; max-width: 100%; }
 }
 
 /* ===== TESTIMONIALS (single quote + clickable clients) ===== */
+/* ===== TESTIMONIALS (responsive: desktop row, mobile carousel) ===== */
 .testimonials {
   padding: 140px 48px 120px;
   max-width: 1280px;
@@ -525,7 +526,6 @@ img { display: block; max-width: 100%; }
   display: flex;
   justify-content: center;
 }
-
 .testimonial-quote {
   font-size: clamp(20px, 1.9vw, 26px);
   font-weight: 400;
@@ -534,17 +534,18 @@ img { display: block; max-width: 100%; }
   max-width: 900px;
   margin: 0 auto 64px;
   color: var(--ink);
-  transition: opacity 0.4s ease;
+  transition: opacity 0.3s ease;
 }
-  
+
+/* Desktop: row of clickable avatars */
 .testimonial-clients {
-  display: flex !important;
-  justify-content: space-around !important;
+  display: flex;
+  justify-content: space-around;
   align-items: flex-start;
   flex-wrap: wrap;
-  gap: 40px !important;
-  max-width: 1100px !important;
-  margin: 0 auto !important;
+  gap: 40px;
+  max-width: 1100px;
+  margin: 0 auto;
 }
 .client {
   display: flex;
@@ -565,11 +566,20 @@ img { display: block; max-width: 100%; }
   position: relative;
   overflow: hidden;
 }
+.client-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  position: relative;
+  z-index: 1;
+}
 .client-avatar::after {
   content: attr(data-initial);
   position: absolute; inset: 0;
   display: flex; align-items: center; justify-content: center;
   font-size: 18px; font-weight: 500; color: #6B7280;
+  z-index: 0;
 }
 .client-name {
   font-size: 14px;
@@ -585,6 +595,30 @@ img { display: block; max-width: 100%; }
   color: var(--muted);
   text-transform: uppercase;
 }
+
+/* Pagination dots — hidden on desktop, shown on mobile */
+.testimonial-dots {
+  display: none;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 32px;
+}
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--line);
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+.dot.active {
+  background: var(--ink);
+}
+
+/* MOBILE — carousel mode */
+@media
 
 /* ===== Scroll reveal animations ===== */
 .reveal {
@@ -950,31 +984,39 @@ img { display: block; max-width: 100%; }
 <!-- ========== TESTIMONIALS ========== -->
 <section class="testimonials" id="testimonials">
   <div class="section-num reveal" style="margin-bottom:40px; justify-content:center; display:inline-flex; width:100%; align-items:center"><strong>04</strong> · Voices</div>
+
   <p class="testimonial-quote reveal" id="testimonialQuote">
     "Took the problem seriously: dug into the clinical workflow, talked to doctors, and proposed an interface that cut patient registration from 15 minutes to 2. Not a designer for the sake of beauty — a designer who thinks about the people who use the product every day."
   </p>
-  <div class="testimonial-clients reveal" style="display:flex !important; justify-content:center !important; gap:56px; flex-wrap:wrap;">
-    <div class="client active" data-quote="&quot;Took the problem seriously: dug into the clinical workflow, talked to doctors, and proposed an interface that cut patient registration from 15 minutes to 2. Not a designer for the sake of beauty — a designer who thinks about the people who use the product every day.&quot;">
+
+  <div class="testimonial-clients reveal" id="testimonialClients">
+    <div class="client active" data-index="0">
       <div class="client-avatar">
-        <img src="../client-emdeu.webp" alt="Emdeu COO">
+        <img src="../client-emdeu.webp" alt="EMDEU COO">
       </div>
       <div class="client-name">Client Name</div>
       <div class="client-role">EMDEU · COO</div>
     </div>
-    <div class="client" data-quote="&quot;Over four years, he built a unified visual style for the platform and trained a team of 7 illustrators so well that we didn&apos;t need to redo anything after he left. A rare case when a designer thinks one level up — about the system, not just the screens.&quot;">
+    <div class="client" data-index="1">
       <div class="client-avatar">
-        <img src="../client-kazcontent.webp" alt="KazContent TeamLead">
+        <img src="../client-kazcontent.webp" alt="KazContent Teamlead">
       </div>
       <div class="client-name">Yana Smolyarova</div>
-      <div class="client-role">KazContent · TeamLead</div>
+      <div class="client-role">KazContent · Team Lead</div>
     </div>
-    <div class="client" data-quote="&quot;The designer is excellent. In terms of UI and UX, there are no complaints. The work was done on time. I am also always ready to hear ideas, criticism and suggestions.&quot;">
+    <div class="client" data-index="2">
       <div class="client-avatar">
         <img src="../client-kaztour.webp" alt="KazTour backend">
       </div>
       <div class="client-name">Nurmukhamed</div>
-      <div class="client-role">KazTour · PHP Backend Developer</div>
+      <div class="client-role">KazTour · PHP Backend</div>
     </div>
+  </div>
+
+  <div class="testimonial-dots reveal" id="testimonialDots">
+    <button class="dot active" data-index="0" aria-label="1"></button>
+    <button class="dot" data-index="1" aria-label="2"></button>
+    <button class="dot" data-index="2" aria-label="3"></button>
   </div>
 </section>
 
