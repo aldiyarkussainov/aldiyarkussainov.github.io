@@ -618,7 +618,52 @@ img { display: block; max-width: 100%; }
 }
 
 /* MOBILE — carousel mode */
-@media
+@media (max-width: 768px) {
+  .testimonials {
+    padding: 80px 24px 70px;
+  }
+  .testimonial-quote {
+    font-size: 18px;
+    margin-bottom: 40px;
+  }
+  .testimonial-clients {
+    gap: 0;
+    flex-direction: column;
+    align-items: center;
+    max-width: 100%;
+    overflow: hidden;
+    touch-action: pan-y;
+  }
+  .client {
+    display: none;
+    opacity: 1;
+    cursor: default;
+  }
+  .client.active {
+    display: flex;
+    animation: clientFade 0.4s ease;
+  }
+  .client-avatar {
+    width: 120px;
+    height: 120px;
+    margin-bottom: 24px;
+  }
+  .client-name {
+    font-size: 18px;
+    margin-bottom: 8px;
+  }
+  .client-role {
+    font-size: 11px;
+  }
+  .testimonial-dots {
+    display: flex;
+  }
+}
+
+@keyframes clientFade {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
 
 /* ===== Scroll reveal animations ===== */
 .reveal {
@@ -776,7 +821,7 @@ img { display: block; max-width: 100%; }
     <a href="#work" class="nav-link">Work</a>
     <a href="#process" class="nav-link">Process</a>
     <a href="#contact" class="nav-link">Contact</a>
-    <div class="lang-switch">
+        <div class="lang-switch">
       <a href="../">RU</a>
       <a href="/en/" class="active">EN</a>
     </div>
@@ -819,13 +864,13 @@ img { display: block; max-width: 100%; }
     </div>
 
     <div class="about-col reveal" data-delay="1">
-      <p>I got into design by accident — went to university for a degree, and design pulled me in. <strong>Over six years</strong> I've worked across different industries: from illustrations for Bilimland, Kazakhstan's largest education platform, to interfaces for the state media holding Qazcontent, and products at Ozimiz, an IT outsourcing company.</p>
-      <p>I also run operations as COO of the team in parallel.</p>
+      <p>I got into design by accident — went to university for a degree, and design pulled me in. <strong>Over six years</strong> I've worked across industries: from illustrations for Bilimland, Kazakhstan's largest education platform, to interfaces for the state media holding Qazcontent and products at Ozimiz, an IT outsourcing company.</p>
+      <p>I also run operations as COO of the team.</p>
     </div>
 
     <div class="about-col reveal" data-delay="2">
       <p>I'm drawn to hard problems. Enterprise admin panels with dozens of tables, multi-role systems where one product serves the patient, another the doctor, and a third the administrator, products with high data density where the user has no time to figure things out.</p>
-      <p>I take such projects end-to-end — from the first conversation with the client to the final screens and post-launch support. <strong>A designer must listen to the client but think for the user</strong> — that's not a contradiction, that's the job.</p>
+      <p>I take such projects end-to-end — from the first conversation with the client to the final screens and post-launch support. <strong>A designer must listen to the client but think for the user</strong>  — that's not a contradiction, that's the job.</p>
     </div>
 
     <div class="about-socials reveal" data-delay="3">
@@ -873,7 +918,7 @@ img { display: block; max-width: 100%; }
         <div class="project-info">
           <div class="project-num">01 · Healthcare · 2024–2025</div>
           <h3 class="project-title">EMDEU Telehealth</h3>
-          <p class="project-tagline">A telehealth ecosystem of 4 products: patient app, video consultations, doctor admin panel, and psychological surveys for three medical universities.</p>
+          <p class="project-tagline">A telehealth ecosystem of 4 products: patient app, patient registry, doctor admin panel, and psychological surveys for three medical universities.</p>
         </div>
         <span class="project-arrow">→</span>
       </div>
@@ -915,7 +960,7 @@ img { display: block; max-width: 100%; }
         <div class="project-info">
           <div class="project-num">04 · Travel-tech · 2024</div>
           <h3 class="project-title">KazTour CRM</h3>
-          <p class="project-tagline">An internal tool for a travel company. Every day, every manager, every hotel — it has to work faster than thought.</p>
+          <p class="project-tagline">An internal tool for a travel company. Every day, every manager, every hotel — has to work faster than thought.</p>
         </div>
         <span class="project-arrow">→</span>
       </div>
@@ -937,7 +982,7 @@ img { display: block; max-width: 100%; }
   <div class="process-intro">
     <div class="section-num reveal" style="margin-bottom:18px"><strong>03</strong> · Process</div>
     <h2 class="reveal">What's behind the final screen.</h2>
-    <p class="reveal">The final design is 10% of the work. The other 90% is sketches, dozens of iterations of one screen, and the habit of designing logic before touching pixels.</p>
+    <p class="reveal">The final design is 10% of the work. The other 90% is sketches, dozens of iterations of one screen, and the habit of thinking for every role at once.</p>
   </div>
 
   <div class="process-grid">
@@ -955,7 +1000,7 @@ img { display: block; max-width: 100%; }
       <div class="process-cover">
         <img src="../process-iterations.webp" alt="Iterations">
       </div>
-      <div class="process-tag">User Flow</div>
+      <div class="process-tag">Iterations</div>
       <div class="process-title">5–10 versions of one screen</div>
       <p class="process-desc">The main EMDEU screen went through a dozen iterations.</p>
     </div>
@@ -1104,48 +1149,45 @@ img { display: block; max-width: 100%; }
     revealEls.forEach(el => revealObs.observe(el));
   }
 
- // Testimonial client switcher (with dots + swipe support)
-const clients = document.querySelectorAll('.client');
-const dots = document.querySelectorAll('.testimonial-dots .dot');
-const quoteEl = document.getElementById('testimonialQuote');
-const wrap = document.querySelector('.testimonial-clients');
-let activeIndex = 0;
+  // Testimonial switcher (clicks + dots + swipe)
+  const tClients = document.querySelectorAll('.testimonial-clients .client');
+  const tDots = document.querySelectorAll('.testimonial-dots .dot');
+  const tQuoteEl = document.getElementById('testimonialQuote');
+  const tWrap = document.querySelector('.testimonial-clients');
 
-function setActive(index) {
-  if (index < 0) index = clients.length - 1;
-  if (index >= clients.length) index = 0;
-  activeIndex = index;
+  const tQuotes = [
+    'Took the problem seriously: dug into the clinical workflow, talked to doctors, and proposed an interface that cut patient registration from 15 minutes to 2. Not a designer for the sake of beauty — a designer who thinks about the people who use the product every day.',
+    'Over four years, he built a unified visual style for the platform and trained a team of 7 illustrators so well that we did not need to redo anything after he left. A rare case when a designer thinks one level up — about the system, not just the screens.',
+    'The designer is excellent. In terms of UI and UX, there are no complaints. The work was done on time. He is also always ready to hear ideas, criticism and suggestions.'
+  ];
 
-  const newQuote = clients[index].getAttribute('data-quote');
-
-  clients.forEach((c, i) => c.classList.toggle('active', i === index));
-  dots.forEach((d, i) => d.classList.toggle('active', i === index));
-
-  if (quoteEl && newQuote) {
-    quoteEl.style.opacity = '0';
-    setTimeout(() => {
-      quoteEl.textContent = newQuote;
-      quoteEl.style.opacity = '1';
-    }, 220);
+  let tActive = 0;
+  function tSetActive(i) {
+    if (i < 0) i = tQuotes.length - 1;
+    if (i >= tQuotes.length) i = 0;
+    tActive = i;
+    if (tQuoteEl) {
+      tQuoteEl.style.opacity = '0';
+      setTimeout(() => {
+        tQuoteEl.textContent = '"' + tQuotes[i] + '"';
+        tQuoteEl.style.opacity = '1';
+      }, 200);
+    }
+    tClients.forEach((c, idx) => c.classList.toggle('active', idx === i));
+    tDots.forEach((d, idx) => d.classList.toggle('active', idx === i));
   }
-}
 
-if (clients.length && quoteEl) {
-  clients.forEach((c, i) => c.addEventListener('click', () => setActive(i)));
-  dots.forEach((d, i) => d.addEventListener('click', () => setActive(i)));
+  tClients.forEach((c, i) => c.addEventListener('click', () => tSetActive(i)));
+  tDots.forEach((d, i) => d.addEventListener('click', () => tSetActive(i)));
 
-  // Mobile swipe
-  if (wrap) {
-    let startX = 0;
-    wrap.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, {passive: true});
-    wrap.addEventListener('touchend', e => {
-      const diff = e.changedTouches[0].clientX - startX;
-      if (Math.abs(diff) > 50) {
-        setActive(diff < 0 ? activeIndex + 1 : activeIndex - 1);
-      }
+  if (tWrap) {
+    let tStartX = 0;
+    tWrap.addEventListener('touchstart', e => { tStartX = e.touches[0].clientX; }, {passive: true});
+    tWrap.addEventListener('touchend', e => {
+      const diff = e.changedTouches[0].clientX - tStartX;
+      if (Math.abs(diff) > 50) tSetActive(diff < 0 ? tActive + 1 : tActive - 1);
     }, {passive: true});
   }
-}
 })();
 </script>
 
