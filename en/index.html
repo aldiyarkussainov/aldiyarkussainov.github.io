@@ -94,9 +94,7 @@ img { display: block; max-width: 100%; }
   width: 100%;
   height: min(58vh, 540px);
   min-height: 420px;
-  background:
-    radial-gradient(circle at 30% 25%, #1F1F1F 0%, transparent 65%),
-    linear-gradient(135deg, #050505 0%, #1A1A1A 100%);
+  background: #0B0503;
   overflow: hidden;
   padding: 28px;
   display: flex;
@@ -149,6 +147,8 @@ img { display: block; max-width: 100%; }
   width: auto;
   object-fit: cover;
   object-position: center bottom;
+  align-self: flex-end;
+  margin-bottom: -28px;
 }
 .hero-photo-area:has(img)::after { display: none; }
 
