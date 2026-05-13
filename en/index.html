@@ -1,0 +1,1084 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aldiyar Kussainov — UI/UX Designer</title>
+<meta name="description" content="UI/UX Designer with 6+ years across healthcare, education, retail and travel-tech. Based in Astana, Kazakhstan.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --bg: #FAFAF7;
+  --ink: #0A0A0A;
+  --ink-soft: #2A2A2A;
+  --muted: #6B7280;
+  --line: #E8E8E2;
+  --accent: #3568FF;
+
+  --dark-bg: #0A0A0A;
+  --dark-bg-soft: #1A1A1A;
+  --dark-ink: #FAFAF7;
+  --dark-muted: #8B8B85;
+  --dark-line: rgba(255,255,255,0.08);
+
+  --sans: 'Geist', -apple-system, BlinkMacSystemFont, sans-serif;
+  --mono: 'JetBrains Mono', ui-monospace, monospace;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--sans);
+  background: var(--bg);
+  color: var(--ink);
+  font-weight: 400;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+a { color: inherit; text-decoration: none; }
+img { display: block; max-width: 100%; }
+
+/* ===== NAV ===== */
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 20px 48px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(250, 250, 247, 0.86);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--line);
+  opacity: 0;
+  transform: translateY(-100%);
+  pointer-events: none;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+.nav.nav-visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+.nav-logo { font-size: 15px; font-weight: 600; letter-spacing: -0.01em; }
+.nav-right { display: flex; gap: 32px; align-items: center; font-size: 13px; }
+.nav-link { color: var(--muted); transition: color 0.2s ease; }
+.nav-link:hover { color: var(--ink); }
+.lang-switch {
+  display: flex;
+  gap: 10px;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  padding-left: 24px;
+  border-left: 1px solid var(--line);
+}
+.lang-switch a { color: var(--muted); transition: color 0.2s ease; }
+.lang-switch a.active { color: var(--ink); }
+.lang-switch a:hover { color: var(--ink); }
+
+/* ===== HERO ===== */
+.hero {
+  padding: 0;
+  max-width: none;
+  margin: 0;
+}
+.hero-dark {
+  position: relative;
+  width: 100%;
+  height: min(58vh, 540px);
+  min-height: 420px;
+  background:
+    radial-gradient(circle at 30% 25%, #1F1F1F 0%, transparent 65%),
+    linear-gradient(135deg, #050505 0%, #1A1A1A 100%);
+  overflow: hidden;
+  padding: 28px;
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+}
+.hero-tl {
+  position: absolute;
+  top: 28px; left: 32px;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--dark-ink);
+  text-transform: uppercase;
+  z-index: 2;
+}
+.hero-tr {
+  position: absolute;
+  top: 28px; right: 32px;
+  text-align: right;
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  color: var(--dark-ink);
+  line-height: 1.7;
+  text-transform: uppercase;
+  z-index: 2;
+}
+.hero-photo-area {
+  position: relative;
+  height: 100%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  width: 100%;
+}
+.hero-photo-area::after {
+  content: "Place your portrait here · centered, 3:4 portrait";
+  position: absolute;
+  bottom: 20px;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  color: rgba(255,255,255,0.28);
+  text-transform: uppercase;
+}
+.hero-photo-area img {
+  height: 100%;
+  width: auto;
+  object-fit: cover;
+  object-position: center bottom;
+}
+.hero-photo-area:has(img)::after { display: none; }
+
+.hero-foot {
+  margin: 36px auto 0;
+  max-width: 1280px;
+  padding: 0 48px 80px;
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 48px;
+  align-items: end;
+}
+.hero-name {
+  font-size: clamp(44px, 8.5vw, 124px);
+  font-weight: 800;
+  line-height: 0.92;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+}
+.hero-quote { padding-bottom: 14px; }
+.hero-quote-title {
+  font-size: clamp(20px, 1.7vw, 22px);
+  font-weight: 600;
+  line-height: 1.3;
+  margin-bottom: 10px;
+  letter-spacing: -0.018em;
+}
+.hero-quote-text {
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--ink-soft);
+}
+
+/* ===== shared section label (no decorative dash now) ===== */
+.section-label {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  color: var(--muted);
+  text-transform: uppercase;
+  margin-bottom: 28px;
+}
+
+/* ===== ABOUT (Biography) ===== */
+.about {
+  padding: 120px 48px 100px;
+  max-width: 1280px;
+  margin: 0 auto;
+  border-top: 1px solid var(--line);
+}
+.about-stmt {
+  font-size: clamp(32px, 4.6vw, 64px);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.035em;
+  max-width: 1080px;
+  margin-bottom: 96px;
+}
+.about-stmt .light {
+  color: var(--muted);
+  font-weight: 300;
+}
+.about-stmt strong {
+  color: var(--ink);
+  font-weight: 700;
+}
+.about-top {
+  display: grid;
+  grid-template-columns: 0.6fr 1.2fr 1.2fr 0.7fr;
+  gap: 56px;
+  align-items: flex-start;
+}
+.about-heading h2 {
+  font-size: clamp(28px, 3vw, 36px);
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+.about-col {
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--muted);
+}
+.about-col p { margin-bottom: 16px; }
+.about-col p:last-child { margin-bottom: 0; }
+.about-col strong { color: var(--ink); font-weight: 600; }
+
+.about-socials h3 {
+  font-size: clamp(28px, 3vw, 36px);
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  margin-bottom: 24px;
+}
+.social-icons {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+.social-icons a {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--ink);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.25s ease, transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.social-icons a:hover {
+  background: var(--accent);
+  transform: translateY(-3px) rotate(-8deg);
+}
+.social-icons svg {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+}
+.about-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.about-actions button {
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ink);
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 100px;
+  padding: 10px 18px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
+}
+.about-actions button:hover {
+  border-color: var(--ink);
+}
+.about-actions button.copied {
+  background: var(--ink);
+  color: #fff;
+  border-color: var(--ink);
+}
+.about-actions svg { width: 14px; height: 14px; fill: currentColor; }
+
+/* ===== WORK ===== */
+.work {
+  padding: 80px 48px 40px;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+.work-intro {
+  margin-bottom: 48px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+.work-intro h2 {
+  font-size: clamp(32px, 4vw, 48px);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+}
+.work-intro .section-label { margin-bottom: 12px; }
+
+.work-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px 28px;
+}
+
+.project {
+  display: block;
+}
+.project-card {
+  display: block;
+  cursor: pointer;
+}
+.project-cover {
+  width: 100%;
+  aspect-ratio: 14/9;
+  background: var(--line);
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 18px;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.project-cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.project-card:hover .project-cover {
+  transform: translateY(-4px);
+}
+.project-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+}
+.project-info { flex: 1; }
+.project-num {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  color: var(--muted);
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+.project-title {
+  font-size: clamp(20px, 1.8vw, 24px);
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  transition: color 0.2s ease;
+  margin-bottom: 8px;
+}
+.project-tagline {
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--muted);
+  max-width: 460px;
+}
+.project-card:hover .project-title { color: var(--accent); }
+.project-arrow {
+  font-family: var(--mono);
+  font-size: 18px;
+  color: var(--muted);
+  flex-shrink: 0;
+  transition: color 0.2s ease, transform 0.2s ease;
+  margin-top: 4px;
+}
+.project-card:hover .project-arrow {
+  color: var(--accent);
+  transform: translateX(4px);
+}
+
+/* ===== Section number marker (signature ordering) ===== */
+.section-num {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  color: var(--muted);
+  text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+}
+.section-num strong {
+  color: var(--ink);
+  font-weight: 500;
+}
+.section-num::before {
+  content: "";
+  display: block;
+  width: 24px;
+  height: 1px;
+  background: var(--ink);
+}
+
+/* ===== Signature mark ===== */
+.sig {
+  display: inline-block;
+  vertical-align: middle;
+}
+.sig-nav { width: 26px; height: auto; color: var(--ink); }
+.sig-divider {
+  display: flex;
+  justify-content: center;
+  padding: 60px 48px;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+.sig-divider svg { width: 36px; height: auto; opacity: 0.45; }
+.sig-foot { width: 22px; height: auto; opacity: 0.7; vertical-align: -3px; margin-right: 8px; color: var(--dark-ink); }
+
+/* ===== PROCESS ===== */
+.process {
+  padding: 100px 48px;
+  max-width: 1280px;
+  margin: 0 auto;
+  border-top: 1px solid var(--line);
+}
+.process-intro {
+  margin-bottom: 56px;
+  max-width: 720px;
+}
+.process-intro .section-num { margin-bottom: 16px; }
+.process-intro h2 {
+  font-size: clamp(32px, 4vw, 48px);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  margin-bottom: 16px;
+}
+.process-intro p {
+  font-size: 16px;
+  color: var(--muted);
+  line-height: 1.55;
+  max-width: 560px;
+}
+.process-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 22px;
+}
+.process-card {
+  display: block;
+}
+.process-cover {
+  width: 100%;
+  aspect-ratio: 4/3;
+  background: var(--line);
+  border-radius: 12px;
+  margin-bottom: 16px;
+  overflow: hidden;
+}
+.process-cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.process-tag {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  color: var(--muted);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.process-title {
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: -0.015em;
+  margin-bottom: 6px;
+}
+.process-desc {
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+@media (max-width: 900px) {
+  .process { padding: 60px 24px; }
+  .process-intro { margin-bottom: 36px; }
+  .process-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+  }
+  .sig-divider { padding: 32px 24px; }
+  .sig-divider svg { width: 28px; }
+}
+
+/* ===== TESTIMONIALS (single quote + clickable clients) ===== */
+.testimonials {
+  padding: 140px 48px 120px;
+  max-width: 1280px;
+  margin: 0 auto;
+  border-top: 1px solid var(--line);
+  text-align: center;
+}
+.testimonials-label {
+  margin-bottom: 48px;
+  display: flex;
+  justify-content: center;
+}
+
+.testimonial-quote {
+  font-size: clamp(20px, 1.9vw, 26px);
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: -0.01em;
+  max-width: 900px;
+  margin: 0 auto 64px;
+  color: var(--ink);
+  transition: opacity 0.4s ease;
+}
+
+.testimonial-clients {
+  display: flex;
+  justify-content: center;
+  gap: 56px;
+  flex-wrap: wrap;
+}
+.client {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+  opacity: 0.4;
+}
+.client:hover { opacity: 0.7; }
+.client.active { opacity: 1; }
+.client-avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #E5E7EB 0%, #D1D5DB 100%);
+  margin-bottom: 16px;
+  position: relative;
+  overflow: hidden;
+}
+.client-avatar::after {
+  content: attr(data-initial);
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px; font-weight: 500; color: #6B7280;
+}
+.client-name {
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin-bottom: 4px;
+}
+.client.active .client-name { color: var(--ink); }
+.client-role {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+  text-transform: uppercase;
+}
+
+/* ===== Scroll reveal animations ===== */
+.reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal[data-delay="1"] { transition-delay: 0.08s; }
+.reveal[data-delay="2"] { transition-delay: 0.16s; }
+.reveal[data-delay="3"] { transition-delay: 0.24s; }
+.reveal[data-delay="4"] { transition-delay: 0.32s; }
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+}
+
+/* ===== DARK FOOTER ===== */
+.contact-footer { background: var(--dark-bg); color: var(--dark-ink); padding: 140px 48px 56px; }
+.contact-footer-inner { max-width: 1280px; margin: 0 auto; }
+.cf-title {
+  font-size: clamp(56px, 9vw, 140px);
+  font-weight: 700;
+  line-height: 0.95;
+  letter-spacing: -0.045em;
+  margin-bottom: 80px;
+}
+.cf-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr 1fr;
+  gap: 56px;
+  padding-top: 56px;
+  border-top: 1px solid var(--dark-line);
+}
+.cf-direct a {
+  display: block;
+  font-size: clamp(22px, 2.5vw, 32px);
+  font-weight: 500;
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+  color: var(--dark-ink);
+  margin-bottom: 8px;
+  transition: color 0.2s ease;
+}
+.cf-direct a:hover { color: var(--accent); }
+.cf-col-label {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  color: var(--dark-muted);
+  margin-bottom: 24px;
+}
+.cf-col ul { list-style: none; }
+.cf-col li { margin-bottom: 14px; }
+.cf-col li a {
+  font-size: 15px;
+  color: var(--dark-ink);
+  transition: color 0.2s ease;
+}
+.cf-col li a:hover { color: var(--accent); }
+.cf-col li.address { font-size: 14px; opacity: 0.85; line-height: 1.5; }
+.cf-bottom {
+  margin-top: 100px;
+  padding-top: 28px;
+  border-top: 1px solid var(--dark-line);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  color: var(--dark-muted);
+  text-transform: uppercase;
+}
+
+/* ===== MOBILE ===== */
+.project-inline-visual { display: none; }
+
+@media (max-width: 900px) {
+  .nav { padding: 14px 20px; }
+  .nav-right { gap: 18px; font-size: 12px; }
+  .nav-right .nav-link { display: none; }
+  .lang-switch { padding-left: 0; border-left: none; }
+
+  .hero { padding: 0; }
+  .hero-dark {
+    height: 56vh;
+    min-height: 380px;
+    padding: 20px;
+  }
+  .hero-tl { font-size: 12px; top: 20px; left: 20px; }
+  .hero-tr { font-size: 10px; top: 20px; right: 20px; }
+  .hero-photo-area::after { font-size: 9px; bottom: 14px; }
+  .hero-foot {
+    margin-top: 28px;
+    padding: 0 16px 60px;
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+  .hero-name { font-size: clamp(36px, 11vw, 72px); }
+  .hero-quote { padding-bottom: 0; }
+
+  .about { padding: 70px 24px 60px; }
+  .about-stmt {
+    font-size: clamp(26px, 7.5vw, 38px);
+    margin-bottom: 56px;
+  }
+  .about-top {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .work { padding: 50px 24px 20px; }
+  .work-intro {
+    margin-bottom: 28px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  .work-grid {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+  .project-cover { margin-bottom: 14px; }
+  .project-title { font-size: 19px; }
+
+  .testimonials { padding: 80px 24px 70px; }
+  .testimonial-quote { margin-bottom: 48px; }
+  .testimonial-clients { gap: 32px; }
+
+  .contact-footer { padding: 80px 24px 32px; }
+  .cf-grid { grid-template-columns: 1fr; gap: 40px; padding-top: 40px; }
+  .cf-bottom {
+    margin-top: 60px;
+    flex-direction: column;
+    gap: 12px;
+    text-align: center;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- ========== NAV ========== -->
+<nav class="nav">
+  <a href="../" class="nav-logo" aria-label="Aldiyar Kussainov">
+    <svg class="sig sig-nav" viewBox="0 0 32 25" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+      <path fill-rule="evenodd" clip-rule="evenodd" d="M23.2165 24.0702L29.5445 23.1211C29.6859 23.0989 29.7795 23.0606 29.5254 23.0385L23.1554 22.4783C23.0462 22.4664 22.9359 22.4781 22.8311 22.5126C22.7263 22.5472 22.6293 22.6039 22.546 22.6794C22.4628 22.7548 22.3949 22.8473 22.3466 22.9513C22.2984 23.0554 22.2707 23.1687 22.2653 23.2843C22.2735 23.4046 22.3055 23.5217 22.3592 23.6281C22.4129 23.7346 22.4871 23.828 22.577 23.9024C22.667 23.9768 22.7707 24.0305 22.8815 24.0601C22.9922 24.0897 23.1077 24.0945 23.2203 24.0742L23.2165 24.0702ZM13.246 24.6667H1.09042C0.150675 24.6667 -0.328749 23.8304 0.253818 22.9478L4.11977 17.104C4.66431 18.1619 5.33934 19.139 6.12724 20.0098C7.61518 21.6521 9.81747 22.0027 11.676 23.1171C12.4457 23.5765 12.9882 24.0863 13.2422 24.6626L13.246 24.6667ZM16.814 24.6667H15.1847C15.4311 23.3286 14.9059 22.2647 13.6834 21.6279L15.9984 19.764L18.3115 21.6279C17.091 22.2607 16.5657 23.3246 16.8083 24.6626L16.814 24.6667ZM27.879 17.094L31.7449 22.9478C32.3294 23.8304 31.85 24.6667 30.9102 24.6667H18.7527C19.0068 24.0904 19.5492 23.5825 20.319 23.1211C22.1794 22.0068 24.3817 21.6561 25.8696 20.0138C26.6576 19.1369 27.332 18.1537 27.8752 17.0899L27.879 17.094ZM15.9984 0C16.2344 0.0129996 16.464 0.0845599 16.6688 0.208862C16.8736 0.333164 17.0477 0.506699 17.1769 0.715355L24.4714 11.9354L26.2726 14.6618C25.5392 18.2587 23.2872 20.1287 20.9989 20.1488C19.448 20.1629 16.3518 18.9579 16.8159 14.5872C16.9286 13.5293 17.8454 12.2779 19.0125 12.2235C20.126 12.1711 21.2052 12.9187 21.3408 14.1056C21.5433 15.8829 19.8434 16.8018 18.9113 17.2955C20.2101 17.8033 21.3466 17.632 22.2023 16.8925C22.5846 16.5456 22.8866 16.111 23.0852 15.622C23.2839 15.1331 23.3739 14.6026 23.3483 14.0713C23.3355 13.3336 23.1222 12.6153 22.7339 12.0016C22.3455 11.3879 21.7984 10.9048 21.1575 10.6094C20.1413 10.1339 18.9093 10.0472 17.6678 10.3374C17.6678 8.94295 17.2075 7.43567 15.9984 5.87599C14.7893 7.43567 14.3252 8.94295 14.3252 10.3374C13.0913 10.0472 11.8421 10.1359 10.8432 10.6215C10.2029 10.9171 9.65656 11.4005 9.26919 12.0143C8.88182 12.628 8.6697 13.3462 8.65807 14.0834C8.63099 14.6138 8.71913 15.1436 8.91576 15.6326C9.11239 16.1215 9.41232 16.5566 9.79264 16.9046C10.6503 17.634 11.7848 17.8053 13.0856 17.3076C12.1516 16.8139 10.4535 15.897 10.656 14.1177C10.7897 12.9308 11.8689 12.1832 12.9843 12.2356C14.1514 12.29 15.0682 13.5414 15.179 14.5993C15.6431 18.9579 12.5469 20.1629 10.9979 20.1509C8.70582 20.1307 6.45577 18.2607 5.72422 14.6638L7.52349 11.9374L14.8199 0.715355C14.9491 0.506699 15.1232 0.333164 15.328 0.208862C15.5328 0.0845599 15.7625 0.0129996 15.9984 0ZM8.78604 24.0702L2.45993 23.1211C2.31859 23.0989 2.22309 23.0606 2.47903 23.0385L8.84907 22.4783C8.95826 22.4664 9.06861 22.4781 9.17337 22.5126C9.27814 22.5472 9.37513 22.6039 9.45842 22.6794C9.54172 22.7548 9.60957 22.8473 9.65783 22.9513C9.7061 23.0554 9.73377 23.1687 9.73916 23.2843C9.7304 23.404 9.69809 23.5205 9.64431 23.6263C9.59052 23.7321 9.51644 23.8249 9.42677 23.8989C9.33711 23.9728 9.23382 24.0262 9.12351 24.0557C9.01319 24.0852 8.89826 24.0901 8.78604 24.0702Z"/>
+    </svg>
+  </a>
+  <div class="nav-right">
+    <a href="#about" class="nav-link">About</a>
+    <a href="#work" class="nav-link">Work</a>
+    <a href="#process" class="nav-link">Process</a>
+    <a href="#contact" class="nav-link">Contact</a>
+    <div class="lang-switch">
+      <a href="../">RU</a>
+      <a href="/en/" class="active">EN</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ========== HERO ========== -->
+<section class="hero">
+  <div class="hero-dark">
+    <span class="hero-tl">04 SECTIONS</span>
+    <div class="hero-tr">UI/UX Designer</div>
+    <div class="hero-photo-area">
+      <!-- Replace this comment with: <img src="../aldiyar.webp" alt="Aldiyar Kussainov"> -->
+    </div>
+  </div>
+
+  <div class="hero-foot">
+    <h1 class="hero-name">Aldiyar<br>Kussainov</h1>
+    <div class="hero-quote">
+      <div class="hero-quote-title">Simplicity is not the absence of complexity.</div>
+      <p class="hero-quote-text">It's when complexity works for the user, not against them.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ========== ABOUT (Biography) ========== -->
+<section class="about" id="about">
+
+  <div class="section-num reveal" style="margin-bottom:32px"><strong>02</strong> · About</div>
+
+  <h2 class="about-stmt reveal">
+    <span class="light">Most designers think like designers.</span><br>
+    <strong>I try to think like the user.</strong>
+  </h2>
+
+  <div class="about-top">
+
+    <div class="about-heading reveal">
+      <h2>Biography</h2>
+    </div>
+
+    <div class="about-col reveal" data-delay="1">
+      <p>I got into design by accident — went to university for a degree, and design pulled me in. <strong>Over six years</strong> I've worked across different industries: from illustrations for Bilimland, Kazakhstan's largest education platform, to interfaces for the state media holding Qazcontent, and products at Ozimiz, an IT outsourcing company.</p>
+      <p>I also run operations as COO of the team in parallel.</p>
+    </div>
+
+    <div class="about-col reveal" data-delay="2">
+      <p>I'm drawn to hard problems. Enterprise admin panels with dozens of tables, multi-role systems where one product serves the patient, another the doctor, and a third the administrator, products with high data density where the user has no time to figure things out.</p>
+      <p>I take such projects end-to-end — from the first conversation with the client to the final screens and post-launch support. <strong>A designer must listen to the client but think for the user</strong> — that's not a contradiction, that's the job.</p>
+    </div>
+
+    <div class="about-socials reveal" data-delay="3">
+      <h3>Socials</h3>
+
+      <div class="social-icons">
+        <a href="https://behance.net/aldiyarkussainov" target="_blank" rel="noopener" aria-label="Behance">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><path d="M7.443 5.347c.639 0 1.221.057 1.75.169.531.111.985.297 1.367.555.379.258.674.605.886 1.04.211.435.317.971.317 1.604 0 .687-.156 1.259-.469 1.715-.311.457-.774.83-1.387 1.122.836.241 1.458.662 1.869 1.262.411.602.617 1.327.617 2.175 0 .686-.133 1.281-.398 1.785a3.485 3.485 0 0 1-1.07 1.241 4.633 4.633 0 0 1-1.516.679 6.61 6.61 0 0 1-1.756.226H1V5.347h6.443zm-.388 5.76c.523 0 .953-.124 1.291-.373.336-.249.502-.654.502-1.215 0-.312-.056-.566-.169-.764a1.205 1.205 0 0 0-.453-.467 1.873 1.873 0 0 0-.652-.235 4.108 4.108 0 0 0-.766-.066H4v3.12h3.055zm.188 6.043c.287 0 .563-.027.825-.084.262-.057.494-.151.696-.281a1.41 1.41 0 0 0 .484-.535c.123-.225.184-.515.184-.871 0-.696-.197-1.194-.59-1.49-.394-.299-.916-.448-1.564-.448H4v3.709h3.243zm9.687-.064c.444.432 1.084.648 1.92.648.6 0 1.116-.151 1.549-.451.432-.301.696-.62.793-.954h2.539c-.408 1.265-1.031 2.169-1.871 2.715-.839.546-1.853.818-3.044.818-.829 0-1.578-.133-2.245-.398a4.667 4.667 0 0 1-1.697-1.139 5.122 5.122 0 0 1-1.069-1.759c-.247-.685-.371-1.441-.371-2.268 0-.798.126-1.541.381-2.226a5.226 5.226 0 0 1 1.084-1.776 4.989 4.989 0 0 1 1.677-1.181c.652-.288 1.371-.432 2.158-.432.886 0 1.658.171 2.317.515.658.343 1.199.806 1.621 1.387.421.582.728 1.244.913 1.987.184.743.252 1.517.205 2.323h-7.379c0 .85.286 1.65.719 2.191zm3.367-5.711c-.353-.385-.937-.593-1.629-.593-.451 0-.825.076-1.123.228a2.343 2.343 0 0 0-.733.566 2.014 2.014 0 0 0-.396.733 3.348 3.348 0 0 0-.126.643h4.572c-.066-.71-.31-1.193-.565-1.577zM15 7.456h5.625V5.847H15v1.609z"/></svg>
+        </a>
+        <a href="https://linkedin.com/in/aldiyarkussainov" target="_blank" rel="noopener" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.063 2.063 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        </a>
+        <a href="https://t.me/aldiyar_kussainov" target="_blank" rel="noopener" aria-label="Telegram">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.466.141a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+        </a>
+        <a href="https://wa.me/77001616026" target="_blank" rel="noopener" aria-label="WhatsApp">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+        </a>
+      </div>
+
+      <div class="about-actions">
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ========== WORK ========== -->
+<section class="work" id="work">
+
+  <div class="work-intro">
+    <div class="reveal">
+      <div class="section-num" style="margin-bottom:18px"><strong>01</strong> · Selected Work · 2024–2026</div>
+      <h2>Cases and how I work.</h2>
+    </div>
+  </div>
+
+  <div class="work-grid">
+
+    <a href="../emdeu.html" class="project-card reveal">
+      <div class="project-cover">
+        <!-- <img src="../emdeu-cover.webp" alt="EMDEU"> -->
+      </div>
+      <div class="project-meta">
+        <div class="project-info">
+          <div class="project-num">01 · Healthcare · 2024–2025</div>
+          <h3 class="project-title">EMDEU Telehealth</h3>
+          <p class="project-tagline">A telehealth ecosystem of 4 products: patient app, video consultations, doctor admin panel, and psychological surveys for three medical universities.</p>
+        </div>
+        <span class="project-arrow">→</span>
+      </div>
+    </a>
+
+    <a href="../omarov.html" class="project-card reveal" data-delay="1">
+      <div class="project-cover">
+        <!-- <img src="../omarov-cover.webp" alt="Omarov Dental"> -->
+      </div>
+      <div class="project-meta">
+        <div class="project-info">
+          <div class="project-num">02 · Healthcare · Branding · 2024</div>
+          <h3 class="project-title">Omarov Dental</h3>
+          <p class="project-tagline">A dental clinic where the receptionist, doctor, and patient see the same appointment from three different perspectives.</p>
+        </div>
+        <span class="project-arrow">→</span>
+      </div>
+    </a>
+
+    <a href="../ketroy.html" class="project-card reveal" data-delay="2">
+      <div class="project-cover">
+        <!-- <img src="../ketroy-cover.webp" alt="KETROY"> -->
+      </div>
+      <div class="project-meta">
+        <div class="project-info">
+          <div class="project-num">03 · Retail · 2024</div>
+          <h3 class="project-title">KETROY Menswear</h3>
+          <p class="project-tagline">Not a store in an app — a store as a brand. News, promotions, prizes, with no "buy now" pressure.</p>
+        </div>
+        <span class="project-arrow">→</span>
+      </div>
+    </a>
+
+    <a href="../kaztour.html" class="project-card reveal" data-delay="3">
+      <div class="project-cover">
+        <!-- <img src="../kaztour-cover.webp" alt="KazTour CRM"> -->
+      </div>
+      <div class="project-meta">
+        <div class="project-info">
+          <div class="project-num">04 · Travel-tech · 2024</div>
+          <h3 class="project-title">KazTour CRM</h3>
+          <p class="project-tagline">An internal tool for a travel company. Every day, every manager, every hotel — it has to work faster than thought.</p>
+        </div>
+        <span class="project-arrow">→</span>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+<!-- ========== SIGNATURE DIVIDER ========== -->
+<div class="sig-divider reveal" aria-hidden="true">
+  <svg viewBox="0 0 32 25" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M23.2165 24.0702L29.5445 23.1211C29.6859 23.0989 29.7795 23.0606 29.5254 23.0385L23.1554 22.4783C23.0462 22.4664 22.9359 22.4781 22.8311 22.5126C22.7263 22.5472 22.6293 22.6039 22.546 22.6794C22.4628 22.7548 22.3949 22.8473 22.3466 22.9513C22.2984 23.0554 22.2707 23.1687 22.2653 23.2843C22.2735 23.4046 22.3055 23.5217 22.3592 23.6281C22.4129 23.7346 22.4871 23.828 22.577 23.9024C22.667 23.9768 22.7707 24.0305 22.8815 24.0601C22.9922 24.0897 23.1077 24.0945 23.2203 24.0742L23.2165 24.0702ZM13.246 24.6667H1.09042C0.150675 24.6667 -0.328749 23.8304 0.253818 22.9478L4.11977 17.104C4.66431 18.1619 5.33934 19.139 6.12724 20.0098C7.61518 21.6521 9.81747 22.0027 11.676 23.1171C12.4457 23.5765 12.9882 24.0863 13.2422 24.6626L13.246 24.6667ZM16.814 24.6667H15.1847C15.4311 23.3286 14.9059 22.2647 13.6834 21.6279L15.9984 19.764L18.3115 21.6279C17.091 22.2607 16.5657 23.3246 16.8083 24.6626L16.814 24.6667ZM27.879 17.094L31.7449 22.9478C32.3294 23.8304 31.85 24.6667 30.9102 24.6667H18.7527C19.0068 24.0904 19.5492 23.5825 20.319 23.1211C22.1794 22.0068 24.3817 21.6561 25.8696 20.0138C26.6576 19.1369 27.332 18.1537 27.8752 17.0899L27.879 17.094ZM15.9984 0C16.2344 0.0129996 16.464 0.0845599 16.6688 0.208862C16.8736 0.333164 17.0477 0.506699 17.1769 0.715355L24.4714 11.9354L26.2726 14.6618C25.5392 18.2587 23.2872 20.1287 20.9989 20.1488C19.448 20.1629 16.3518 18.9579 16.8159 14.5872C16.9286 13.5293 17.8454 12.2779 19.0125 12.2235C20.126 12.1711 21.2052 12.9187 21.3408 14.1056C21.5433 15.8829 19.8434 16.8018 18.9113 17.2955C20.2101 17.8033 21.3466 17.632 22.2023 16.8925C22.5846 16.5456 22.8866 16.111 23.0852 15.622C23.2839 15.1331 23.3739 14.6026 23.3483 14.0713C23.3355 13.3336 23.1222 12.6153 22.7339 12.0016C22.3455 11.3879 21.7984 10.9048 21.1575 10.6094C20.1413 10.1339 18.9093 10.0472 17.6678 10.3374C17.6678 8.94295 17.2075 7.43567 15.9984 5.87599C14.7893 7.43567 14.3252 8.94295 14.3252 10.3374C13.0913 10.0472 11.8421 10.1359 10.8432 10.6215C10.2029 10.9171 9.65656 11.4005 9.26919 12.0143C8.88182 12.628 8.6697 13.3462 8.65807 14.0834C8.63099 14.6138 8.71913 15.1436 8.91576 15.6326C9.11239 16.1215 9.41232 16.5566 9.79264 16.9046C10.6503 17.634 11.7848 17.8053 13.0856 17.3076C12.1516 16.8139 10.4535 15.897 10.656 14.1177C10.7897 12.9308 11.8689 12.1832 12.9843 12.2356C14.1514 12.29 15.0682 13.5414 15.179 14.5993C15.6431 18.9579 12.5469 20.1629 10.9979 20.1509C8.70582 20.1307 6.45577 18.2607 5.72422 14.6638L7.52349 11.9374L14.8199 0.715355C14.9491 0.506699 15.1232 0.333164 15.328 0.208862C15.5328 0.0845599 15.7625 0.0129996 15.9984 0ZM8.78604 24.0702L2.45993 23.1211C2.31859 23.0989 2.22309 23.0606 2.47903 23.0385L8.84907 22.4783C8.95826 22.4664 9.06861 22.4781 9.17337 22.5126C9.27814 22.5472 9.37513 22.6039 9.45842 22.6794C9.54172 22.7548 9.60957 22.8473 9.65783 22.9513C9.7061 23.0554 9.73377 23.1687 9.73916 23.2843C9.7304 23.404 9.69809 23.5205 9.64431 23.6263C9.59052 23.7321 9.51644 23.8249 9.42677 23.8989C9.33711 23.9728 9.23382 24.0262 9.12351 24.0557C9.01319 24.0852 8.89826 24.0901 8.78604 24.0702Z"/>
+  </svg>
+</div>
+
+<!-- ========== PROCESS ========== -->
+<section class="process" id="process">
+
+  <div class="process-intro">
+    <div class="section-num reveal" style="margin-bottom:18px"><strong>03</strong> · Process</div>
+    <h2 class="reveal">What's behind the final screen.</h2>
+    <p class="reveal">The final design is 10% of the work. The other 90% is sketches, dozens of iterations of one screen, and the habit of designing logic before touching pixels.</p>
+  </div>
+
+  <div class="process-grid">
+
+    <div class="process-card reveal">
+      <div class="process-cover">
+        <img src="../process-sketches.webp" alt="Sketches">
+      </div>
+      <div class="process-tag">Sketches</div>
+      <div class="process-title">Sketches before Figma</div>
+      <p class="process-desc">Every complex screen starts on paper.</p>
+    </div>
+
+    <div class="process-card reveal" data-delay="1">
+      <div class="process-cover">
+        <img src="../process-iterations.webp" alt="Iterations">
+      </div>
+      <div class="process-tag">User Flow</div>
+      <div class="process-title">5–10 versions of one screen</div>
+      <p class="process-desc">The main EMDEU screen went through a dozen iterations.</p>
+    </div>
+
+    <div class="process-card reveal" data-delay="2">
+      <div class="process-cover">
+        <img src="../process-userflow.webp" alt="User Flow">
+      </div>
+      <div class="process-tag">User Flow</div>
+      <div class="process-title">Logic before pixels</div>
+      <p class="process-desc">Every scenario starts as a flow.</p>
+    </div>
+
+    <div class="process-card reveal" data-delay="3">
+      <div class="process-cover">
+        <img src="../process-components.webp" alt="Components">
+      </div>
+      <div class="process-tag">Components</div>
+      <div class="process-title">Component library on the fly</div>
+      <p class="process-desc">200 screens are impossible without a system.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ========== TESTIMONIALS ========== -->
+<section class="testimonials" id="testimonials">
+  <div class="section-num reveal" style="margin-bottom:40px; justify-content:center; display:inline-flex; width:100%; align-items:center"><strong>04</strong> · Voices</div>
+
+  <p class="testimonial-quote reveal" id="testimonialQuote">
+    "Took the problem seriously: dug into the clinical workflow, talked to doctors, and proposed an interface that cut patient registration from 15 minutes to 2. Not a designer for the sake of beauty — a designer who thinks about the people who use the product every day."
+  </p>
+
+  <div class="testimonial-clients reveal">
+
+    <div class="client active" data-quote='"Took the problem seriously: dug into the clinical workflow, talked to doctors, and proposed an interface that cut patient registration from 15 minutes to 2. Not a designer for the sake of beauty — a designer who thinks about the people who use the product every day."'>
+      <div class="client-avatar" data-initial="E"></div>
+      <div class="client-name">Client Name</div>
+      <div class="client-role">EMDEU · Client</div>
+    </div>
+
+    <div class="client" data-quote='"Over four years, he built a unified visual style for the platform and trained a team of 7 illustrators so well that we didn't need to redo anything after he left. A rare case when a designer thinks one level up — about the system, not just the screens."'>
+      <div class="client-avatar" data-initial="B"></div>
+      <div class="client-name">Manager Name</div>
+      <div class="client-role">Bilimland · Team Lead</div>
+    </div>
+
+    <div class="client" data-quote='"He designed an internal CRM where our managers find a hotel and book it 40% faster. Understands enterprise products, doesn't confuse them with consumer apps. Experience shows immediately."'>
+      <div class="client-avatar" data-initial="K"></div>
+      <div class="client-name">Director Name</div>
+      <div class="client-role">KazTour · Operations</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ========== DARK FOOTER ========== -->
+<section class="contact-footer" id="contact">
+  <div class="contact-footer-inner">
+
+    <h2 class="cf-title reveal">Tell me<br>about your project.</h2>
+
+    <div class="cf-grid reveal" data-delay="1">
+      <div class="cf-direct">
+        <a href="mailto:aldiyar.kuss@gmail.com">aldiyar.kuss@gmail.com</a>
+        <a href="tel:+77001616026">+7 700 161 60 26</a>
+      </div>
+      <div class="cf-col">
+        <div class="cf-col-label">/Nav</div>
+        <ul>
+          <li><a href="#">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#work">Work</a></li>
+          <li><a href="#process">Process</a></li>
+          <li><a href="#testimonials">Voices</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div class="cf-col">
+        <div class="cf-col-label">/Social</div>
+        <ul>
+          <li><a href="https://behance.net/aldiyarkussainov" target="_blank" rel="noopener">Behance</a></li>
+          <li><a href="https://linkedin.com/in/aldiyarkussainov" target="_blank" rel="noopener">LinkedIn</a></li>
+          <li><a href="https://t.me/aldiyar_kussainov" target="_blank" rel="noopener">Telegram</a></li>
+          <li><a href="https://wa.me/77001616026" target="_blank" rel="noopener">WhatsApp</a></li>
+        </ul>
+      </div>
+      <div class="cf-col">
+        <div class="cf-col-label">/Based in</div>
+        <ul>
+          <li class="address">
+            Astana, Kazakhstan<br>
+            <span style="opacity:.6">UTC+5</span><br><br>
+            Open to CET / GMT<br>
+            <span style="opacity:.6">timezones</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="cf-bottom">
+      <div>
+        <svg class="sig sig-foot" viewBox="0 0 32 25" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M23.2165 24.0702L29.5445 23.1211C29.6859 23.0989 29.7795 23.0606 29.5254 23.0385L23.1554 22.4783C23.0462 22.4664 22.9359 22.4781 22.8311 22.5126C22.7263 22.5472 22.6293 22.6039 22.546 22.6794C22.4628 22.7548 22.3949 22.8473 22.3466 22.9513C22.2984 23.0554 22.2707 23.1687 22.2653 23.2843C22.2735 23.4046 22.3055 23.5217 22.3592 23.6281C22.4129 23.7346 22.4871 23.828 22.577 23.9024C22.667 23.9768 22.7707 24.0305 22.8815 24.0601C22.9922 24.0897 23.1077 24.0945 23.2203 24.0742L23.2165 24.0702ZM13.246 24.6667H1.09042C0.150675 24.6667 -0.328749 23.8304 0.253818 22.9478L4.11977 17.104C4.66431 18.1619 5.33934 19.139 6.12724 20.0098C7.61518 21.6521 9.81747 22.0027 11.676 23.1171C12.4457 23.5765 12.9882 24.0863 13.2422 24.6626L13.246 24.6667ZM16.814 24.6667H15.1847C15.4311 23.3286 14.9059 22.2647 13.6834 21.6279L15.9984 19.764L18.3115 21.6279C17.091 22.2607 16.5657 23.3246 16.8083 24.6626L16.814 24.6667ZM27.879 17.094L31.7449 22.9478C32.3294 23.8304 31.85 24.6667 30.9102 24.6667H18.7527C19.0068 24.0904 19.5492 23.5825 20.319 23.1211C22.1794 22.0068 24.3817 21.6561 25.8696 20.0138C26.6576 19.1369 27.332 18.1537 27.8752 17.0899L27.879 17.094ZM15.9984 0C16.2344 0.0129996 16.464 0.0845599 16.6688 0.208862C16.8736 0.333164 17.0477 0.506699 17.1769 0.715355L24.4714 11.9354L26.2726 14.6618C25.5392 18.2587 23.2872 20.1287 20.9989 20.1488C19.448 20.1629 16.3518 18.9579 16.8159 14.5872C16.9286 13.5293 17.8454 12.2779 19.0125 12.2235C20.126 12.1711 21.2052 12.9187 21.3408 14.1056C21.5433 15.8829 19.8434 16.8018 18.9113 17.2955C20.2101 17.8033 21.3466 17.632 22.2023 16.8925C22.5846 16.5456 22.8866 16.111 23.0852 15.622C23.2839 15.1331 23.3739 14.6026 23.3483 14.0713C23.3355 13.3336 23.1222 12.6153 22.7339 12.0016C22.3455 11.3879 21.7984 10.9048 21.1575 10.6094C20.1413 10.1339 18.9093 10.0472 17.6678 10.3374C17.6678 8.94295 17.2075 7.43567 15.9984 5.87599C14.7893 7.43567 14.3252 8.94295 14.3252 10.3374C13.0913 10.0472 11.8421 10.1359 10.8432 10.6215C10.2029 10.9171 9.65656 11.4005 9.26919 12.0143C8.88182 12.628 8.6697 13.3462 8.65807 14.0834C8.63099 14.6138 8.71913 15.1436 8.91576 15.6326C9.11239 16.1215 9.41232 16.5566 9.79264 16.9046C10.6503 17.634 11.7848 17.8053 13.0856 17.3076C12.1516 16.8139 10.4535 15.897 10.656 14.1177C10.7897 12.9308 11.8689 12.1832 12.9843 12.2356C14.1514 12.29 15.0682 13.5414 15.179 14.5993C15.6431 18.9579 12.5469 20.1629 10.9979 20.1509C8.70582 20.1307 6.45577 18.2607 5.72422 14.6638L7.52349 11.9374L14.8199 0.715355C14.9491 0.506699 15.1232 0.333164 15.328 0.208862C15.5328 0.0845599 15.7625 0.0129996 15.9984 0ZM8.78604 24.0702L2.45993 23.1211C2.31859 23.0989 2.22309 23.0606 2.47903 23.0385L8.84907 22.4783C8.95826 22.4664 9.06861 22.4781 9.17337 22.5126C9.27814 22.5472 9.37513 22.6039 9.45842 22.6794C9.54172 22.7548 9.60957 22.8473 9.65783 22.9513C9.7061 23.0554 9.73377 23.1687 9.73916 23.2843C9.7304 23.404 9.69809 23.5205 9.64431 23.6263C9.59052 23.7321 9.51644 23.8249 9.42677 23.8989C9.33711 23.9728 9.23382 24.0262 9.12351 24.0557C9.01319 24.0852 8.89826 24.0901 8.78604 24.0702Z"/>
+        </svg>
+        © 2026 Aldiyar Kussainov
+      </div>
+      <div>UI/UX Designer · Available for projects</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ========== SCRIPTS ========== -->
+<script>
+(function() {
+  // Nav appears after hero
+  const heroEl = document.querySelector('.hero');
+  const navEl = document.querySelector('.nav');
+  if (heroEl && navEl) {
+    const navObs = new IntersectionObserver(([entry]) => {
+      navEl.classList.toggle('nav-visible', !entry.isIntersecting);
+    }, { rootMargin: '0px', threshold: 0 });
+    navObs.observe(heroEl);
+  }
+
+  // Scroll reveal — fade-up blocks when they enter viewport
+  const revealEls = document.querySelectorAll('.reveal');
+  if (revealEls.length) {
+    const revealObs = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          revealObs.unobserve(entry.target);
+        }
+      });
+    }, { rootMargin: '0px 0px -10% 0px', threshold: 0.1 });
+    revealEls.forEach(el => revealObs.observe(el));
+  }
+
+  // Testimonial client switcher
+  const clients = document.querySelectorAll('.client');
+  const quoteEl = document.getElementById('testimonialQuote');
+  if (clients.length && quoteEl) {
+    clients.forEach(c => {
+      c.addEventListener('click', () => {
+        const newQuote = c.getAttribute('data-quote');
+        if (!newQuote) return;
+        clients.forEach(x => x.classList.remove('active'));
+        c.classList.add('active');
+        quoteEl.style.opacity = '0';
+        setTimeout(() => {
+          quoteEl.textContent = newQuote;
+          quoteEl.style.opacity = '1';
+        }, 220);
+      });
+    });
+  }
+})();
+</script>
+
+</body>
+</html>
