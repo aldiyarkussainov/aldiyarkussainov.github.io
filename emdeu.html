@@ -387,6 +387,56 @@ img { display: block; max-width: 100%; }
   text-transform: uppercase;
 }
 
+/* ===== Status badge (for V2/concept features) ===== */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  border-radius: 100px;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  background: rgba(53, 104, 255, 0.08);
+  color: var(--accent);
+  border: 1px solid rgba(53, 104, 255, 0.2);
+  margin-bottom: 24px;
+}
+.status-badge::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+/* ===== Feature highlights (what shows) ===== */
+.feature-notes {
+  margin-top: 32px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  padding-top: 32px;
+  border-top: 1px solid var(--line);
+}
+.feature-note-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  color: var(--muted);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.feature-note-text {
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--ink-soft);
+}
+@media (max-width: 768px) {
+  .feature-notes { grid-template-columns: 1fr; gap: 20px; }
+}
+
 /* ===== Sketches ===== */
 .sketches {
   display: grid;
@@ -1003,13 +1053,74 @@ img { display: block; max-width: 100%; }
   </div>
 </section>
 
+<!-- ========== V2 EXPLORATIONS (PPG pulse) ========== -->
+<section class="section">
+  <div class="wrap">
+
+    <div class="section-head">
+      <div>
+        <div class="section-num reveal"><strong>08</strong> · V2 Explorations</div>
+        <h2 class="reveal">Измерение пульса через камеру.</h2>
+      </div>
+      <div>
+        <div class="status-badge reveal">Designed · awaiting budget</div>
+        <p class="reveal">Концепт PPG-измерения пульса через камеру и вспышку смартфона. Палец прикладывается к объективу, вспышка светит через ткань, камера фиксирует флуктуации отражённого света — по ним рассчитывается ЧСС.</p>
+        <p class="reveal">Дизайн готов и согласован с заказчиком. В текущем релизе не реализован — клиент отложил до следующего бюджетного цикла. Сложность была не в визуале, а в управлении ожиданием пользователя в течение 20 секунд измерения.</p>
+      </div>
+    </div>
+
+    <div class="screens-row cols-4 reveal">
+      <div>
+        <div class="screen-frame">
+          <!-- <img src="ppg-intro.webp" alt="PPG intro screen"> -->
+        </div>
+        <div class="screen-caption">01 · Intro</div>
+      </div>
+      <div>
+        <div class="screen-frame">
+          <!-- <img src="ppg-idle.webp" alt="PPG idle state"> -->
+        </div>
+        <div class="screen-caption">02 · Idle</div>
+      </div>
+      <div>
+        <div class="screen-frame">
+          <!-- <img src="ppg-active.webp" alt="PPG measuring"> -->
+        </div>
+        <div class="screen-caption">03 · Measuring</div>
+      </div>
+      <div>
+        <div class="screen-frame">
+          <!-- <img src="ppg-done.webp" alt="PPG result"> -->
+        </div>
+        <div class="screen-caption">04 · Done</div>
+      </div>
+    </div>
+
+    <div class="feature-notes reveal">
+      <div>
+        <div class="feature-note-label">Что показывает</div>
+        <div class="feature-note-text">Проектирование hardware-interaction: камера, вспышка, физическое поведение пользователя.</div>
+      </div>
+      <div>
+        <div class="feature-note-label">Сложность</div>
+        <div class="feature-note-text">Управление ожиданием в течение 20 секунд — прогресс по периметру экрана, live-значения, countdown.</div>
+      </div>
+      <div>
+        <div class="feature-note-label">Legal</div>
+        <div class="feature-note-text">Плашка «Не является медицинским измерением» — обязательный copy для health-фичей без сертификации.</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
 <!-- ========== PROCESS (sketches) ========== -->
 <section class="section">
   <div class="wrap">
 
     <div class="section-head">
       <div>
-        <div class="section-num reveal"><strong>08</strong> · Process</div>
+        <div class="section-num reveal"><strong>09</strong> · Process</div>
         <h2 class="reveal">Скетчи до Figma.</h2>
       </div>
       <div>
@@ -1037,7 +1148,7 @@ img { display: block; max-width: 100%; }
 <section class="section">
   <div class="wrap">
 
-    <div class="section-num reveal"><strong>09</strong> · What I learned</div>
+    <div class="section-num reveal"><strong>10</strong> · What I learned</div>
 
     <h2 class="learned-stmt reveal">
       <span class="light">Главное за этот проект —</span><br>
