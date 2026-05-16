@@ -982,38 +982,38 @@ img { display: block; max-width: 100%; }
         <h2 class="reveal">Веб-админка с реестром МКБ-10.</h2>
       </div>
       <div>
-        <p class="reveal">Полный реестр МКБ-10 на 18 направлений: терапия, кардиология, неврология, психиатрия, эндокринология и другие. Врач ставит диагноз по официальной классификации, история пациента сохраняется в системе.</p>
-        <p class="reveal">Админка построена так, чтобы врач, который работает с ней каждый день, мог за минуту найти пациента, увидеть его историю и записать приём. Высокая плотность информации, но без визуального шума.</p>
+        <p class="reveal">Реестр на 18 направлений — от инфекционных и эндокринных до травм и психических расстройств. Врач выбирает специализацию, видит своих пациентов в этой категории, открывает карточку и проводит осмотр в формате, привычном именно для его профиля.</p>
+        <p class="reveal">Осмотр для ревматолога — это диаграмма суставов и шкалы FRAX, T-score, DAS28. Для кардиолога будет другой набор полей. Заключение собирается автоматически из данных карточки в формальный документ с печатью — врач не переписывает анамнез вручную.</p>
       </div>
     </div>
 
     <div class="screens-row cols-2 reveal">
       <div>
         <div class="screen-frame web">
-          <!-- <img src="case-emdeu/admin-1.jpg" alt="Patient list"> -->
+          <img src="case-emdeu/admin-1.webp" alt="ICD-10 directory">
         </div>
-        <div class="screen-caption">01 · Patient list</div>
+        <div class="screen-caption">01 · ICD-10 directory</div>
       </div>
       <div>
         <div class="screen-frame web">
-          <!-- <img src="case-emdeu/admin-2.jpg" alt="ICD-10 registry"> -->
+          <img src="case-emdeu/admin-2.webp" alt="Patient list">
         </div>
-        <div class="screen-caption">02 · ICD-10 registry</div>
+        <div class="screen-caption">02 · Patient list</div>
       </div>
     </div>
 
     <div class="screens-row cols-2 reveal">
       <div>
         <div class="screen-frame web">
-          <!-- <img src="case-emdeu/admin-3.jpg" alt="Patient card"> -->
+          <img src="case-emdeu/admin-3.webp" alt="Patient examination">
         </div>
-        <div class="screen-caption">03 · Patient card</div>
+        <div class="screen-caption">03 · Examination</div>
       </div>
       <div>
         <div class="screen-frame web">
-          <!-- <img src="case-emdeu/admin-4.jpg" alt="Schedule"> -->
+          <img src="case-emdeu/admin-4.webp" alt="Full conclusion">
         </div>
-        <div class="screen-caption">04 · Schedule</div>
+        <div class="screen-caption">04 · Full conclusion</div>
       </div>
     </div>
 
@@ -1030,27 +1030,28 @@ img { display: block; max-width: 100%; }
         <h2 class="reveal">Психо-опросники для трёх медвузов.</h2>
       </div>
       <div>
-        <p class="reveal">Три медицинских университета внедрили EMDEU в учебный процесс. Их клинические психологи разработали опросники для студентов — Sezini, MMPI, тревожно-депрессивные шкалы — и эти опросники теперь доступны всем пользователям приложения.</p>
+        <p class="reveal">Три медицинских университета внедрили EMDEU в учебный процесс. Их клинические психологи разработали опросники для студентов — Seziný, MMPI, тревожно-депрессивные шкалы — и эти опросники теперь доступны всем пользователям приложения.</p>
         <p class="reveal">Сделка win-win: университеты получили инструмент для своих студентов, EMDEU получил клинически валидированный контент.</p>
+        <p class="reveal">Один UX-момент о котором стоит сказать отдельно — финальный экран. Не клинический score «24/100», а контекстная фраза по результату: «кажется, ты немного устал». В психическом здоровье студент должен почувствовать поддержку, а не диагноз — и это решение принималось вместе с клиническими психологами вузов.</p>
       </div>
     </div>
 
     <div class="screens-row reveal">
       <div>
         <div class="screen-frame">
-          <!-- <img src="case-emdeu/survey-1.jpg" alt="Survey list"> -->
+          <img src="case-emdeu/survey-1.webp" alt="Survey list">
         </div>
         <div class="screen-caption">01 · Survey list</div>
       </div>
       <div>
         <div class="screen-frame">
-          <!-- <img src="case-emdeu/survey-2.jpg" alt="Question"> -->
+          <img src="case-emdeu/survey-2.webp" alt="Question with progress">
         </div>
         <div class="screen-caption">02 · Question</div>
       </div>
       <div>
         <div class="screen-frame">
-          <!-- <img src="case-emdeu/survey-3.jpg" alt="Result"> -->
+          <img src="case-emdeu/survey-3.webp" alt="Contextual result">
         </div>
         <div class="screen-caption">03 · Result</div>
       </div>
@@ -1069,34 +1070,33 @@ img { display: block; max-width: 100%; }
         <h2 class="reveal">Измерение пульса через камеру.</h2>
       </div>
       <div>
-        <div class="status-badge reveal">Designed · awaiting budget</div>
-        <p class="reveal">Концепт PPG-измерения пульса через камеру и вспышку смартфона. Палец прикладывается к объективу, вспышка светит через ткань, камера фиксирует флуктуации отражённого света — по ним рассчитывается ЧСС.</p>
-        <p class="reveal">Дизайн готов и согласован с заказчиком. В текущем релизе не реализован — клиент отложил до следующего бюджетного цикла. Сложность была не в визуале, а в управлении ожиданием пользователя в течение 20 секунд измерения.</p>
+        <p class="reveal">PPG-измерение пульса через камеру и вспышку смартфона. Палец прикладывается к объективу, вспышка светит через ткань, камера фиксирует флуктуации отражённого света — по ним рассчитывается ЧСС.</p>
+        <p class="reveal">Сложность была не в визуале, а в управлении ожиданием пользователя в течение 20 секунд измерения. Прогресс идёт по периметру экрана, BPM обновляется в реальном времени, в конце — крупная цифра и кнопка «Добавить» в трекер.</p>
       </div>
     </div>
 
     <div class="screens-row cols-4 reveal">
       <div>
         <div class="screen-frame">
-          <!-- <img src="ppg-intro.webp" alt="PPG intro screen"> -->
+          <img src="case-emdeu/ppg-1.webp" alt="PPG intro screen">
         </div>
         <div class="screen-caption">01 · Intro</div>
       </div>
       <div>
         <div class="screen-frame">
-          <!-- <img src="ppg-idle.webp" alt="PPG idle state"> -->
+          <img src="case-emdeu/ppg-2.webp" alt="PPG idle — place finger">
         </div>
         <div class="screen-caption">02 · Idle</div>
       </div>
       <div>
         <div class="screen-frame">
-          <!-- <img src="ppg-active.webp" alt="PPG measuring"> -->
+          <img src="case-emdeu/ppg-3.webp" alt="PPG measuring">
         </div>
         <div class="screen-caption">03 · Measuring</div>
       </div>
       <div>
         <div class="screen-frame">
-          <!-- <img src="ppg-done.webp" alt="PPG result"> -->
+          <img src="case-emdeu/ppg-4.webp" alt="PPG done — result">
         </div>
         <div class="screen-caption">04 · Done</div>
       </div>
@@ -1131,19 +1131,22 @@ img { display: block; max-width: 100%; }
       </div>
       <div>
         <p class="reveal">Из-за сжатых сроков я не делал полноценного research с пациентами — понимание потребностей получал от операционного директора, который ежедневно работает и с врачами, и с клиниками.</p>
-        <p class="reveal">Но каждый сложный экран я сначала набрасывал в скетче — и только потом шёл в Figma. Это экономит часы итераций: сразу видно, работает ли иерархия и логика, ещё до того как ты тратишь время на пиксели.</p>
+        <p class="reveal">Но каждый сложный флоу проходил две стадии до Figma. Сначала маркером на доске — архитектура: кто кому пишет, какие связи, какие условия. Потом карандашом на бумаге — wireframes конкретных экранов, иерархия, кнопки. Это экономит часы итераций: сразу видно, работает ли логика, ещё до того как ты тратишь время на пиксели.</p>
       </div>
     </div>
 
-    <div class="sketches reveal">
-      <div class="sketch-frame">
-        <!-- <img src="case-emdeu/sketch-1.jpg" alt="Sketch"> -->
+    <div class="sketches reveal" style="grid-template-columns: repeat(2, 1fr);">
+      <div>
+        <div class="sketch-frame">
+          <img src="case-emdeu/sketch-1.webp" alt="Whiteboard architecture flow">
+        </div>
+        <div class="screen-caption">01 · Whiteboard flow</div>
       </div>
-      <div class="sketch-frame">
-        <!-- <img src="case-emdeu/sketch-2.jpg" alt="Sketch"> -->
-      </div>
-      <div class="sketch-frame">
-        <!-- <img src="case-emdeu/sketch-3.jpg" alt="Sketch"> -->
+      <div>
+        <div class="sketch-frame">
+          <img src="case-emdeu/sketch-2.webp" alt="Paper wireframes of booking screens">
+        </div>
+        <div class="screen-caption">02 · Paper wireframes</div>
       </div>
     </div>
 
